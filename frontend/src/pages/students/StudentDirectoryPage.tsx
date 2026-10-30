@@ -50,7 +50,7 @@ export const StudentDirectoryPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-xs font-semibold tracking-wider uppercase text-gqt-blue bg-blue-50 px-2 py-0.5 rounded">
-            Step 11 & 12 Directory
+            Talent Directory
           </span>
           <h1 className="text-2xl font-bold text-gqt-navy mt-1">Student Talent Directory</h1>
           <p className="text-sm text-gqt-neutral-500">

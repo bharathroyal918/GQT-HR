@@ -691,16 +691,27 @@ export const StudentDrivesPage: React.FC = () => {
                               View Eligibility Preview
                             </Button>
                           )}
-                          <Button
-                            size="sm"
-                            variant="primary"
-                            onClick={() => handleOpenApplyModal(pub)}
-                            disabled={!hasActiveResume}
-                            leftIcon={<Send className="w-3.5 h-3.5" />}
-                            className="bg-gqt-navy hover:bg-gqt-navy-light text-white text-xs"
-                          >
-                            Apply for Opportunity
-                          </Button>
+                          {isStudent ? (
+                            <Button
+                              size="sm"
+                              variant="primary"
+                              onClick={() => handleOpenApplyModal(pub)}
+                              disabled={!hasActiveResume}
+                              leftIcon={<Send className="w-3.5 h-3.5" />}
+                              className="bg-gqt-navy hover:bg-gqt-navy-light text-white text-xs"
+                            >
+                              Apply for Opportunity
+                            </Button>
+                          ) : (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled
+                              className="text-xs text-gqt-neutral-500 bg-gqt-neutral-50 border-gqt-neutral-200"
+                            >
+                              Enrolled Students Only
+                            </Button>
+                          )}
                         </>
                       )}
                     </div>

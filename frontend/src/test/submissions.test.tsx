@@ -330,11 +330,11 @@ describe('Frontend Candidate Submissions Suite (Phase 7 / Steps 24-28)', () => {
       expect(screen.getByText('1GQ21CS101')).toBeInTheDocument();
       expect(screen.getByText('v1')).toBeInTheDocument();
       expect(screen.getByText('SHA-256 Roster Digest:')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /Step 27: Send Profiles to HR/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Send Profiles to HR/i })).toBeInTheDocument();
     });
   });
 
-  it('opens Create Submission Package modal and displays Step 23 readiness badges on candidates', async () => {
+  it('opens Create Submission Package modal and displays readiness badges on candidates', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -370,7 +370,7 @@ describe('Frontend Candidate Submissions Suite (Phase 7 / Steps 24-28)', () => {
     });
   });
 
-  it('opens Profile Dispatch modal on button click (Step 27)', async () => {
+  it('opens Profile Dispatch modal on button click', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -382,17 +382,17 @@ describe('Frontend Candidate Submissions Suite (Phase 7 / Steps 24-28)', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /Step 27: Send Profiles to HR/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Send Profiles to HR/i })).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /Step 27: Send Profiles to HR/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Send Profiles to HR/i }));
 
     expect(screen.getByText('Send Candidate Profiles to HR')).toBeInTheDocument();
     expect(screen.getByText('Transmission Channel')).toBeInTheDocument();
     expect(screen.getByText('Confirm Profile Dispatch')).toBeInTheDocument();
   });
 
-  it('opens Recruiter Acknowledgment modal when viewing a dispatched package (Step 28)', async () => {
+  it('opens Recruiter Acknowledgment modal when viewing a dispatched package', async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -411,10 +411,10 @@ describe('Frontend Candidate Submissions Suite (Phase 7 / Steps 24-28)', () => {
     fireEvent.click(screen.getByText('TCS - Prime Developer Profiles'));
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /Step 28: Record HR Acknowledgement/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Record HR Acknowledgement/i })).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /Step 28: Record HR Acknowledgement/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Record HR Acknowledgement/i }));
 
     expect(screen.getByText('Log Corporate Recruiter Receipt')).toBeInTheDocument();
     expect(screen.getByText('Recruiter Contact Representative *')).toBeInTheDocument();

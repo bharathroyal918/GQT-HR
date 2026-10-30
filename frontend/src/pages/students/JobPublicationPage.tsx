@@ -153,7 +153,7 @@ export const JobPublicationPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-semibold tracking-wider uppercase text-gqt-blue bg-blue-50 px-2 py-0.5 rounded">
-              Step 10: Notification Broadcast
+              Notification Broadcast
             </span>
             <StatusBadge
               variant={isApproved ? 'success' : 'warning'}
@@ -172,7 +172,7 @@ export const JobPublicationPage: React.FC = () => {
         <div className="p-4 rounded-lg bg-amber-50 border border-amber-200/80 text-amber-800 flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-semibold text-sm">Publication Gated: Step 7 Approval Required</h4>
+            <h4 className="font-semibold text-sm">Publication Gated: Placement Head Approval Required</h4>
             <p className="text-sm mt-0.5">
               According to the authoritative GQT HRMS workflow, only jobs that have completed the 5-point verification checklist and received formal sign-off from the Placement Head can be broadcast to students.
             </p>
@@ -266,12 +266,12 @@ export const JobPublicationPage: React.FC = () => {
                   <option value="">No creative asset attached (Plain text announcement)</option>
                   {approvedCreativeRequests.map((req: CreativeRequestListItem) => (
                     <option key={req.id} value={req.id}>
-                      {req.title} ({req.deliverable_type_display} &bull; Step 9 Certified)
+                      {req.title} ({req.deliverable_type_display} &bull; Verified & Approved)
                     </option>
                   ))}
                 </select>
                 <p className="text-xs text-gqt-neutral-500 mt-1">
-                  Only promotional assets with confirmed Step 9 sign-off by the Placement Head can be attached.
+                  Only promotional assets with confirmed approval by the Placement Head can be attached.
                 </p>
               </div>
 

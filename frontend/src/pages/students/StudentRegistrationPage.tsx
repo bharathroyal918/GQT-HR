@@ -102,7 +102,7 @@ export const StudentRegistrationPage: React.FC = () => {
           GQT Student Registration & Onboarding
         </h2>
         <p className="mt-1 text-center text-sm text-gqt-neutral-500">
-          Workflow Step 11: Register your academic credentials for institutional campus recruitment drives.
+          Register your academic credentials for institutional campus recruitment drives.
         </p>
       </div>
 

@@ -121,7 +121,7 @@ export const CreativeDirectoryPage: React.FC = () => {
             Creative Studio & Promotional Assets
           </h1>
           <p className="text-sm text-slate-600 mt-1">
-            Authoritative Workflow Steps 8–9: Produce promotional flyers, display banners, and social posts with 4-point design verification and Placement Head sign-off.
+            Design promotional flyers, display banners, and social posts with 4-point design verification and Placement Head sign-off.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -184,7 +184,7 @@ export const CreativeDirectoryPage: React.FC = () => {
         <Card className="border-l-4 border-l-blue-500">
           <CardContent className="p-4 flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Review Pending (Step 9)</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Review Pending</p>
               <p className="text-2xl font-bold text-blue-700 mt-1">{metrics?.review_pending ?? '-'}</p>
             </div>
             <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
@@ -295,7 +295,7 @@ export const CreativeDirectoryPage: React.FC = () => {
           ) : !creativesData?.data || creativesData.data.length === 0 ? (
             <EmptyState
               title="No Creative Requests Found"
-              description="No promotional asset requests match your filters. Create a request from an approved Job Requirement to begin Step 8."
+              description="No promotional asset requests match your filters. Create a request from an approved Job Requirement to initiate designer drafting."
               action={
                 canCreate ? (
                   <Button
@@ -318,7 +318,7 @@ export const CreativeDirectoryPage: React.FC = () => {
                     <th className="py-3.5 px-4">Format</th>
                     <th className="py-3.5 px-4">Priority</th>
                     <th className="py-3.5 px-4">Designer</th>
-                    <th className="py-3.5 px-4">4-Point Checklist (Step 9)</th>
+                    <th className="py-3.5 px-4">4-Point Design Checklist</th>
                     <th className="py-3.5 px-4">Status</th>
                     <th className="py-3.5 px-4 text-right">Actions</th>
                   </tr>

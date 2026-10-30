@@ -368,8 +368,8 @@ describe('Frontend Job Requirements & Verification Suite (Phase 3)', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/Review & Approval Workspace/i)).toBeInTheDocument();
-      expect(screen.getByText(/Step 6: Checklist Audit Queue/i)).toBeInTheDocument();
-      expect(screen.getByText(/Step 7: Head Approval Queue/i)).toBeInTheDocument();
+      expect(screen.getByText(/Checklist Audit Queue/i)).toBeInTheDocument();
+      expect(screen.getByText(/Head Approval Queue/i)).toBeInTheDocument();
       expect(screen.getByText('Data Science Intern')).toBeInTheDocument();
       expect(screen.getByText('Mu Sigma')).toBeInTheDocument();
     });

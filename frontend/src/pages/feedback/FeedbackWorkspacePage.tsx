@@ -378,7 +378,7 @@ export const FeedbackWorkspacePage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-gqt-blue-light text-gqt-blue">
-              Phase 9
+              360° Review
             </span>
             <h1 className="text-2xl font-black text-gqt-navy tracking-tight">Feedback Collection Workspace</h1>
           </div>

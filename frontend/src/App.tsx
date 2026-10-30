@@ -92,6 +92,8 @@ export const App: React.FC = () => {
               <Routes>
                 {/* Public Authentication Routes */}
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/login/:role" element={<LoginPage />} />
+                <Route path="/auth/login" element={<LoginPage />} />
                 <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/access-denied" element={<AccessDeniedPage />} />
@@ -215,7 +217,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Job Requirements & Verification Checklist (Phase 3) */}
+                  {/* Job Requirements & Verification Checklist */}
                   <Route
                     path="jobs"
                     element={
@@ -257,7 +259,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Creative Studio & Promotional Assets Management (Phase 4 / Steps 8-9) */}
+                  {/* Creative Studio & Promotional Assets Management */}
                   <Route
                     path="creatives"
                     element={
@@ -299,7 +301,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Student Registration & Eligibility Engine (Phase 5 / Steps 10-14) */}
+                  {/* Student Registration & Eligibility Engine */}
                   <Route
                     path="students/profile"
                     element={<StudentProfileWorkspacePage />}
@@ -345,7 +347,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Student Preparation (Phase 6 / Steps 15-23) */}
+                  {/* Student Preparation */}
                   <Route
                     path="preparation/resume-reviews"
                     element={<ResumeReviewWorkspacePage />}
@@ -367,7 +369,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Candidate Submissions & Profile Dispatch (Phase 7 / Steps 24-28) */}
+                  {/* Candidate Submissions & Profile Dispatch */}
                   <Route
                     path="submissions"
                     element={
@@ -377,7 +379,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Interview Management & Tracking (Phase 8 / Steps 29-35) */}
+                  {/* Interview Management & Tracking */}
                   <Route
                     path="interviews"
                     element={
@@ -387,7 +389,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Placement Management & Tracking (Phase 8 / Steps 36-41) */}
+                  {/* Placement Management & Tracking */}
                   <Route
                     path="placements"
                     element={
@@ -397,7 +399,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Feedback Collection (Phase 9 / Categories A, B, C) */}
+                  {/* Feedback Collection */}
                   <Route
                     path="feedback"
                     element={
@@ -407,7 +409,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Reports & Analytics (Phase 11 / Steps 48-52) */}
+                  {/* Reports & Analytics */}
                   <Route
                     path="reports"
                     element={
@@ -417,7 +419,7 @@ export const App: React.FC = () => {
                     }
                   />
 
-                  {/* Continuous Improvement & Strategic Planning (Phase 13) */}
+                  {/* Continuous Improvement & Strategic Planning */}
                   <Route
                     path="continuous-improvement"
                     element={

@@ -173,7 +173,7 @@ export const CrmDashboardPage: React.FC = () => {
                 Operational Target
               </span>
               <span className="text-xs text-gqt-neutral-300">
-                Workflow Step 2 Benchmark: 100+ Touchpoints / Day
+                Corporate Outreach Benchmark: 100+ Touchpoints / Day
               </span>
             </div>
             <h2 className="text-xl font-bold tracking-tight">Daily Outreach Benchmark</h2>

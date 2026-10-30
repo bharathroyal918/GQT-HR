@@ -321,9 +321,9 @@ describe('Phase 11: Reports & Analytics Hub UI Suite', () => {
     const placementTabBtn = await screen.findByText('3. Placement Reports');
     fireEvent.click(placementTabBtn);
 
-    expect(await screen.findByText('Step 36: Final Result Status')).toBeInTheDocument();
-    expect(screen.getByText('Step 38: Offer Letter Lifecycle')).toBeInTheDocument();
-    expect(screen.getByText('Step 40: Joining Outcomes')).toBeInTheDocument();
+    expect(await screen.findByText('Final Result Status')).toBeInTheDocument();
+    expect(screen.getByText('Offer Letter Lifecycle')).toBeInTheDocument();
+    expect(screen.getByText('Joining Outcomes')).toBeInTheDocument();
     expect(screen.getByText('Institutional Compensation Analytics (CTC in ₹ Lakhs)')).toBeInTheDocument();
     expect(screen.getByText('Company Placements Table')).toBeInTheDocument();
     expect(screen.getByText('InnovateX Global')).toBeInTheDocument();

@@ -15,6 +15,9 @@ import {
   Archive,
   RefreshCw,
   ShieldAlert,
+  ShieldCheck,
+  Users,
+  Palette,
 } from 'lucide-react';
 import { jobsApi } from '@/api/jobsApi';
 import {
@@ -268,7 +271,7 @@ export const JobDetailPage: React.FC = () => {
                 </span>
                 {job.is_locked && (
                   <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
-                    Locked for Creatives (Step 8)
+                    Locked for Creative Campaign
                   </span>
                 )}
               </div>
@@ -342,11 +345,11 @@ export const JobDetailPage: React.FC = () => {
               Current Stage:
             </span>
             <span className="text-sm font-bold text-gqt-navy">
-              {job.status === 'DRAFT' && 'Step 5: Job Description Ingestion'}
+              {job.status === 'DRAFT' && 'Job Description Draft'}
               {['PENDING_VERIFICATION', 'UNDER_REVIEW', 'CHANGES_REQUESTED'].includes(job.status) &&
-                'Step 6: Checklist Audit & Verification'}
-              {job.status === 'VERIFIED' && 'Step 6 Verified — Ready for Step 7 Sign-Off'}
-              {job.status === 'APPROVED' && 'Step 7 Complete — Approved for Creative Design (Step 8)'}
+                'Checklist Audit & Verification'}
+              {job.status === 'VERIFIED' && 'Checklist Verified — Ready for Approval'}
+              {job.status === 'APPROVED' && 'Verified & Approved for Creative Design'}
               {job.status === 'REJECTED' && 'Opportunity Rejected'}
             </span>
           </div>
@@ -359,7 +362,7 @@ export const JobDetailPage: React.FC = () => {
                 onClick={() => setIsSubmitModalOpen(true)}
                 leftIcon={<Send className="w-4 h-4" />}
               >
-                Submit for Verification (Step 6)
+                Submit for Verification
               </Button>
             )}
 
@@ -399,7 +402,7 @@ export const JobDetailPage: React.FC = () => {
                     : 'Approve this hiring opportunity and lock for creatives'
                 }
               >
-                Approve Opportunity (Step 7)
+                Approve Opportunity
               </Button>
             )}
 
@@ -417,6 +420,51 @@ export const JobDetailPage: React.FC = () => {
         </CardContent>
       </Card>
 
+      {/* Pipeline Next Actions for Approved Requirements */}
+      {job.status === 'APPROVED' && (
+        <Card className="bg-gradient-to-r from-emerald-50/80 via-blue-50/60 to-indigo-50/80 border border-emerald-200/90 shadow-xs">
+          <CardContent className="p-4 sm:p-5">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Verified &amp; Approved
+                  </span>
+                  <span className="text-xs text-gqt-neutral-500 font-medium">Hiring Pipeline Activated</span>
+                </div>
+                <h3 className="text-base font-bold text-gqt-navy mt-1">Candidate Matching &amp; Broadcast Operations</h3>
+                <p className="text-xs text-gqt-neutral-600 mt-0.5">
+                  Launch the deterministic eligibility engine, review shortlisted student cohorts, broadcast the drive notice, or request creative promotional posters.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <Link to={`/jobs/${job.id}/eligibility`}>
+                  <Button size="sm" variant="outline" className="bg-white hover:bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold" leftIcon={<ShieldCheck className="w-4 h-4 text-emerald-600" />}>
+                    Eligibility Engine
+                  </Button>
+                </Link>
+                <Link to={`/jobs/${job.id}/cohort`}>
+                  <Button size="sm" variant="outline" className="bg-white hover:bg-blue-50 text-gqt-blue border-blue-200 font-semibold" leftIcon={<Users className="w-4 h-4 text-gqt-blue" />}>
+                    Candidate Cohort
+                  </Button>
+                </Link>
+                <Link to={`/jobs/${job.id}/publish`}>
+                  <Button size="sm" variant="primary" className="bg-gqt-blue hover:bg-gqt-navy font-semibold" leftIcon={<Send className="w-4 h-4" />}>
+                    Broadcast Notice
+                  </Button>
+                </Link>
+                <Link to={`/creatives/new?job_requirement=${job.id}`}>
+                  <Button size="sm" variant="outline" className="bg-white hover:bg-indigo-50 text-indigo-700 border-indigo-200 font-semibold" leftIcon={<Palette className="w-4 h-4 text-indigo-600" />}>
+                    Create Poster
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Tabs Navigation */}
       <div className="border-b border-gqt-neutral-200 flex gap-6">
         <button
@@ -428,7 +476,7 @@ export const JobDetailPage: React.FC = () => {
           }`}
         >
           <FileCheck className="w-4 h-4" />
-          5-Point Verification Checklist (Step 6)
+          5-Point Verification Checklist
           <span className="text-xs px-2 py-0.5 rounded-full bg-gqt-neutral-100 text-gqt-neutral-700">
             {progress?.verified_mandatory || 0}/{progress?.total_mandatory || 5}
           </span>
@@ -443,7 +491,7 @@ export const JobDetailPage: React.FC = () => {
           }`}
         >
           <Briefcase className="w-4 h-4" />
-          Full Job Specifications (Step 5)
+          Full Job Specifications
         </button>
 
         <button
@@ -455,7 +503,7 @@ export const JobDetailPage: React.FC = () => {
           }`}
         >
           <Clock className="w-4 h-4" />
-          Audit & Decision History ({job.decisions?.length || 0})
+          Audit &amp; Decision History ({job.decisions?.length || 0})
         </button>
       </div>
 

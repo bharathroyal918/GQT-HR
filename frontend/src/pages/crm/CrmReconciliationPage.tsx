@@ -127,7 +127,7 @@ export const CrmReconciliationPage: React.FC = () => {
               CRM Database Reconciliation
             </h1>
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase bg-blue-50 text-gqt-blue border border-blue-200">
-              Phase 10 Engine
+              Consistency Engine
             </span>
           </div>
           <p className="text-sm text-gqt-neutral-600 mt-1">

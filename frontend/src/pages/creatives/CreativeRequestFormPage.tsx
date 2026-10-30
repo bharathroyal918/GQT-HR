@@ -125,7 +125,7 @@ export const CreativeRequestFormPage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
             <Palette className="w-6 h-6 text-[#005BBB]" />
-            Initiate Creative Request (Step 8)
+            Initiate Creative Request
           </h1>
           <p className="text-sm text-slate-600">
             Dispatch creative production briefs for approved job opportunities to Graphic Designers.
@@ -165,7 +165,7 @@ export const CreativeRequestFormPage: React.FC = () => {
               {approvedJobs.length === 0 && !isLoadingJobs && (
                 <p className="text-xs text-amber-600 mt-1 flex items-center gap-1">
                   <AlertCircle className="w-3.5 h-3.5" />
-                  No approved job requirements available. JDs must pass Step 7 Placement Head sign-off first.
+                  No approved job requirements available. JDs must pass Placement Head sign-off first.
                 </p>
               )}
             </div>

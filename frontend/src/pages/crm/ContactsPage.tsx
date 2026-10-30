@@ -55,7 +55,7 @@ export const ContactsPage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-black text-gqt-navy tracking-tight">HR Contact Directory</h1>
           <p className="text-sm text-gqt-neutral-600 mt-1">
-            Directory of Corporate Talent Acquisition Leads and HR Decision Makers (Workflow Step 3).
+            Directory of Corporate Talent Acquisition Leads and HR Decision Makers.
           </p>
         </div>
         <Link to="/crm/contacts/new">

@@ -251,7 +251,7 @@ export const CreativeDetailPage: React.FC = () => {
                 </span>
                 {creativeReq.is_locked && (
                   <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
-                    Step 9 Signed Off
+                    Approved &amp; Certified
                   </span>
                 )}
               </div>
@@ -322,11 +322,11 @@ export const CreativeDetailPage: React.FC = () => {
                   title={
                     !currentVersion.checklist_progress.all_verified
                       ? 'Sign-off is locked: All 4 checklist criteria must be verified first'
-                      : 'Step 9 Placement Head Sign-off'
+                      : 'Placement Head Sign-off'
                   }
                 >
                   <CheckCircle2 className="w-4 h-4" />
-                  Sign Off & Approve (Step 9)
+                  Sign Off & Approve
                 </Button>
               )}
 
@@ -372,7 +372,7 @@ export const CreativeDetailPage: React.FC = () => {
           }`}
         >
           <FileCheck className="w-4 h-4" />
-          4-Point Design Verification (Step 9)
+          4-Point Design Verification
           {currentVersion && (
             <span className="ml-1 px-2 py-0.5 rounded-full text-xs bg-slate-100 text-slate-700">
               {currentVersion.checklist_progress.verified}/4
@@ -389,7 +389,7 @@ export const CreativeDetailPage: React.FC = () => {
           }`}
         >
           <Info className="w-4 h-4" />
-          Creative Brief & Job Specs (Step 8)
+          Creative Brief & Job Specs
         </button>
 
         <button
@@ -476,11 +476,11 @@ export const CreativeDetailPage: React.FC = () => {
                 <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-lg text-sm text-emerald-900 flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-bold">Placement Head Sign-Off Certified (Step 9 Passed)</p>
+                    <p className="font-bold">Placement Head Sign-Off Certified</p>
                     <p className="text-xs text-emerald-800 mt-0.5">
                       This promotional asset has passed all 4 mandatory verification checks and was approved by{' '}
                       <span className="font-semibold">{currentVersion.approved_by?.full_name}</span> on{' '}
-                      {currentVersion.approved_at && new Date(currentVersion.approved_at).toLocaleString()}. It is now eligible for student publication broadcast (Step 10).
+                      {currentVersion.approved_at && new Date(currentVersion.approved_at).toLocaleString()}. It is now eligible for student publication broadcast.
                     </p>
                   </div>
                 </div>
@@ -505,7 +505,7 @@ export const CreativeDetailPage: React.FC = () => {
                       Authoritative 4-Point Design Verification Checklist
                     </CardTitle>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Source: `HRMS - Complete Workflow` Step 9. All 4 checks must evaluate to VERIFIED before Placement Head sign-off.
+                      All 4 checks must evaluate to VERIFIED before Placement Head sign-off.
                     </p>
                   </div>
                   <div className="text-right">
@@ -668,7 +668,7 @@ export const CreativeDetailPage: React.FC = () => {
             <CardHeader className="pb-3 border-b border-slate-100">
               <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-[#005BBB]" />
-                Approved Job Specifications (Step 5 Reference)
+                Approved Job Specifications
               </CardTitle>
             </CardHeader>
             <CardContent className="p-4 space-y-3 text-sm">
@@ -813,7 +813,7 @@ export const CreativeDetailPage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="font-bold text-slate-900">Assign Graphic Designer (Step 8)</h3>
+              <h3 className="font-bold text-slate-900">Assign Graphic Designer</h3>
               <button onClick={() => setIsAssignModalOpen(false)} className="text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
@@ -913,7 +913,7 @@ export const CreativeDetailPage: React.FC = () => {
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="font-bold text-slate-900 text-amber-700 flex items-center gap-2">
                 <RotateCcw className="w-5 h-5 text-amber-600" />
-                Return for Revision (Step 9)
+                Return for Revision
               </h3>
               <button onClick={() => setIsCorrectionModalOpen(false)} className="text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
@@ -960,14 +960,14 @@ export const CreativeDetailPage: React.FC = () => {
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="font-bold text-emerald-800 flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                Step 9 Creative Sign-Off Gate
+                Creative Approval &amp; Sign-Off
               </h3>
               <button onClick={() => setIsApproveModalOpen(false)} className="text-slate-400 hover:text-slate-600">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <p className="text-xs text-slate-600">
-              Formally certifies that <span className="font-semibold">{creativeReq.title}</span> v{currentVersion.version_number} has passed all 4 design verification criteria and is approved for student notification broadcast (Step 10).
+              Formally certifies that <span className="font-semibold">{creativeReq.title}</span> v{currentVersion.version_number} has passed all 4 design verification criteria and is approved for student notification broadcast.
             </p>
             <div className="space-y-2">
               <label className="text-xs font-semibold text-slate-700 uppercase">

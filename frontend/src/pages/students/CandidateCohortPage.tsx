@@ -100,7 +100,7 @@ export const CandidateCohortPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-semibold tracking-wider uppercase text-gqt-blue bg-blue-50 px-2 py-0.5 rounded">
-              Step 14: Candidate Cohort
+              Candidate Cohort
             </span>
             <StatusBadge
               variant={isLocked ? 'success' : 'warning'}
@@ -146,7 +146,7 @@ export const CandidateCohortPage: React.FC = () => {
             <p className="text-xs mt-0.5 text-emerald-800">
               This candidate list was formally locked on{' '}
               {cohort?.finalized_at ? new Date(cohort.finalized_at).toLocaleString() : ''} by{' '}
-              {cohort?.finalized_by_name}. Membership is immutable and preserved for downstream Phase 5 candidate packaging and company submission.
+              {cohort?.finalized_by_name}. Membership is immutable and preserved for downstream candidate packaging and company submission.
             </p>
             {cohort?.finalization_notes && (
               <p className="text-xs italic text-emerald-950 mt-1">
@@ -278,7 +278,7 @@ export const CandidateCohortPage: React.FC = () => {
             </div>
 
             <p className="text-xs text-gqt-neutral-500">
-              Workflow Step 14: You are about to certify and formally lock the verified candidate cohort for{' '}
+              You are about to certify and formally lock the verified candidate cohort for{' '}
               <span className="font-semibold text-gqt-navy">{job.title}</span>. Locking freezes the candidate list to guarantee integrity for downstream candidate rosters and company submissions.
             </p>
 

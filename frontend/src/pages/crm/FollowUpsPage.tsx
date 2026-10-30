@@ -303,7 +303,7 @@ export const FollowUpsPage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-black text-gqt-navy tracking-tight">Corporate Follow-Up Workspace</h1>
           <p className="text-sm text-gqt-neutral-600 mt-1">
-            Automated corporate nurturing, multi-channel reminders, officer alerts, and SLA escalations (Phase 12).
+            Automated corporate nurturing, multi-channel reminders, officer alerts, and SLA escalations.
           </p>
         </div>
         <div className="flex items-center gap-2.5">

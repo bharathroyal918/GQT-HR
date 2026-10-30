@@ -350,7 +350,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     await waitFor(() => {
       expect(screen.getByText('Interview Management & Tracking')).toBeInTheDocument();
     });
-    expect(screen.getByText(/Workflow Steps 29–35/i)).toBeInTheDocument();
+    expect(screen.getByText(/Manage candidate shortlists, multi-round scheduling/i)).toBeInTheDocument();
 
     // Verify KPI Cards values
     await waitFor(() => {
@@ -392,7 +392,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
 
     // Modal should be open
     await waitFor(() => {
-      expect(screen.getByText('Receive Candidate Shortlist (Step 29)')).toBeInTheDocument();
+      expect(screen.getByText('Receive Candidate Shortlist')).toBeInTheDocument();
       expect(screen.getByTestId('shortlist-job-select')).toBeInTheDocument();
     });
   });
@@ -414,7 +414,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     fireEvent.click(remindersBtn);
 
     await waitFor(() => {
-      expect(screen.getByText('Automatic Reminders (Step 31)')).toBeInTheDocument();
+      expect(screen.getByText('Automatic Reminders')).toBeInTheDocument();
       expect(screen.getByText(/24 Hours Prior/i)).toBeInTheDocument();
       expect(screen.getByText(/2 Hours Prior/i)).toBeInTheDocument();
       expect(screen.getByText(/30 Minutes Prior/i)).toBeInTheDocument();
@@ -462,7 +462,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     fireEvent.click(screen.getByTestId('confirm-attendance-btn-sched-001'));
 
     await waitFor(() => {
-      expect(screen.getByText('Confirm Attendance (Step 32)')).toBeInTheDocument();
+      expect(screen.getByText('Confirm Attendance')).toBeInTheDocument();
       expect(screen.getByTestId('attendance-choice-select')).toBeInTheDocument();
     });
 
@@ -496,7 +496,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     fireEvent.click(screen.getByTestId('conducted-btn-sched-001'));
 
     await waitFor(() => {
-      expect(screen.getByText('Record Interview Conducted (Step 33)')).toBeInTheDocument();
+      expect(screen.getByText('Record Interview Conducted')).toBeInTheDocument();
       expect(screen.getByTestId('conducted-choice-select')).toBeInTheDocument();
     });
 
@@ -539,7 +539,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     fireEvent.click(evalBtn);
 
     await waitFor(() => {
-      expect(screen.getByText('Evaluate Round (Step 34)')).toBeInTheDocument();
+      expect(screen.getByText('Evaluate Round')).toBeInTheDocument();
       expect(screen.getByTestId('eval-round-status-select')).toBeInTheDocument();
     });
 
@@ -581,7 +581,7 @@ describe('Frontend Interview Management & Tracking Suite (Phase 8 / Steps 29-35)
     fireEvent.click(logBtn);
 
     await waitFor(() => {
-      expect(screen.getByText('Log HR Follow-up (Step 35)')).toBeInTheDocument();
+      expect(screen.getByText('Record Corporate HR Follow-up')).toBeInTheDocument();
       expect(screen.getByTestId('followup-candidate-status-input')).toBeInTheDocument();
     });
   });

@@ -108,7 +108,7 @@ export const OutreachFormPage: React.FC = () => {
         <div>
           <h1 className="text-xl font-black text-gqt-navy">Log Corporate Outreach Touchpoint</h1>
           <p className="text-xs text-gqt-neutral-500 mt-0.5">
-            Record actual interactions contributing toward the 100+ daily outreach operational benchmark (Workflow Step 2).
+            Record corporate outreach touchpoints contributing toward the 100+ daily operational benchmark.
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const OutreachFormPage: React.FC = () => {
           <Info className="w-4 h-4 text-gqt-blue flex-shrink-0 mt-0.5" />
           <div>
             <strong>Activity Log Entry:</strong> This form records a completed communication touchpoint in the CRM audit trail.
-            No external WhatsApp, email, or telephone messages will be automatically dispatched in this phase.
+            No external WhatsApp, email, or telephone messages will be automatically dispatched from this log entry.
           </div>
         </div>
       </Card>

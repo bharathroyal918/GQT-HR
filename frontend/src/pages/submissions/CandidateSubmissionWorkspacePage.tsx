@@ -303,7 +303,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <span className="bg-gqt-navy text-white text-xs font-bold px-2 py-0.5 rounded tracking-wider uppercase">
-              Phase 7 / Steps 24–28
+              Profile Dispatch
             </span>
             <span className="text-xs text-gqt-neutral-500 font-medium">Candidate Submission Engine</span>
           </div>
@@ -389,7 +389,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <FileCheck className="w-4 h-4 text-gqt-blue" />
           </div>
           <p className="text-2xl font-bold text-gqt-blue mt-1">{readyPackages}</p>
-          <span className="text-xs text-gqt-neutral-500">Step 26: Resumes attached</span>
+          <span className="text-xs text-gqt-neutral-500">Verified resumes attached</span>
         </Card>
 
         <Card className="p-4 border-l-4 border-l-amber-500">
@@ -400,7 +400,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <Send className="w-4 h-4 text-amber-600" />
           </div>
           <p className="text-2xl font-bold text-amber-700 mt-1">{dispatchedPackages}</p>
-          <span className="text-xs text-gqt-neutral-500">Step 27: Transmitted to recruiters</span>
+          <span className="text-xs text-gqt-neutral-500">Transmitted to recruiters</span>
         </Card>
 
         <Card className="p-4 border-l-4 border-l-emerald-500">
@@ -411,7 +411,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <CheckCheck className="w-4 h-4 text-emerald-600" />
           </div>
           <p className="text-2xl font-bold text-emerald-700 mt-1">{acknowledgedPackages}</p>
-          <span className="text-xs text-gqt-neutral-500">Step 28: Receipt confirmed & dated</span>
+          <span className="text-xs text-gqt-neutral-500">Receipt confirmed & dated</span>
         </Card>
       </div>
 
@@ -541,7 +541,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                         className="flex items-center gap-1.5 text-xs text-gqt-navy border-gqt-navy"
                       >
                         <FileSpreadsheet className="w-3.5 h-3.5 text-gqt-blue" />
-                        {selectedPackage.package_hash ? 'Regenerate Excel' : 'Step 25: Generate Excel'}
+                        {selectedPackage.package_hash ? 'Regenerate Excel' : 'Generate Excel Roster'}
                       </Button>
                     )}
 
@@ -568,7 +568,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                         className="flex items-center gap-1.5 text-xs border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100"
                       >
                         <FileCheck className="w-3.5 h-3.5 text-amber-600" />
-                        Step 26: Attach Resumes
+                        Attach Verified Resumes
                       </Button>
                     )}
 
@@ -582,7 +582,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                         className="flex items-center gap-1.5 text-xs shadow-sm bg-gqt-navy hover:bg-gqt-navy-dark text-white"
                       >
                         <Send className="w-3.5 h-3.5" />
-                        Step 27: Send Profiles to HR
+                        Send Profiles to HR
                       </Button>
                     )}
 
@@ -596,7 +596,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                         className="flex items-center gap-1.5 text-xs shadow-sm bg-emerald-600 hover:bg-emerald-700 text-white"
                       >
                         <CheckCheck className="w-3.5 h-3.5" />
-                        Step 28: Record HR Acknowledgement
+                        Record HR Acknowledgement
                       </Button>
                     )}
                   </div>
@@ -647,7 +647,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-emerald-800 font-bold text-sm">
                       <CheckCheck className="w-4 h-4 text-emerald-600" />
-                      Receipt Acknowledged by Corporate Recruiter (Step 28)
+                      Receipt Acknowledged by Corporate Recruiter
                     </div>
                     <span className="text-xs text-emerald-700">
                       Confirmed by: <strong>{selectedPackage.acknowledged_by_contact_name}</strong> on{' '}
@@ -684,7 +684,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                     Candidate Roster ({selectedPackage.candidates.length})
                   </h3>
                   <span className="text-xs text-gqt-neutral-500">
-                    Strictly certified placement resume versions locked (Step 23 Gate)
+                    Certified placement resume versions verified and locked
                   </span>
                 </div>
 
@@ -749,7 +749,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                 <div className="border-t border-gqt-neutral-200 pt-4">
                   <h3 className="text-xs font-bold text-gqt-navy uppercase tracking-wider mb-2 flex items-center gap-1.5">
                     <Send className="w-3.5 h-3.5 text-gqt-blue" />
-                    Corporate Transmission History (Step 27)
+                    Corporate Transmission History
                   </h3>
                   <div className="space-y-2">
                     {selectedPackage.dispatch_logs.map(log => (
@@ -794,7 +794,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <div className="flex items-center justify-between border-b pb-3">
               <div>
                 <span className="text-xs font-bold text-gqt-navy uppercase tracking-wider">
-                  Workflow Step 24 Gate
+                  Candidate Roster Assembly
                 </span>
                 <h3 className="text-lg font-bold text-gqt-navy">
                   Prepare Candidate List & Assemble Package
@@ -861,7 +861,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
               {isPoolLoading ? (
                 <div className="py-6 text-center text-xs text-gqt-neutral-500">
                   <RefreshCw className="w-5 h-5 animate-spin mx-auto text-gqt-blue mb-2" />
-                  Verifying applicant eligibility & Step 23 Placement Head certification...
+                  Verifying applicant eligibility & placement certification...
                 </div>
               ) : candidatePool && (
                 <div className="space-y-2 border-t pt-3">
@@ -883,7 +883,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                           <th className="py-2 px-2.5">Name</th>
                           <th className="py-2 px-2.5">Branch</th>
                           <th className="py-2 px-2.5 text-center">CGPA</th>
-                          <th className="py-2 px-2.5">Step 23 Readiness Gate</th>
+                          <th className="py-2 px-2.5">Readiness Status</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gqt-neutral-200">
@@ -914,7 +914,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                                     Placement Ready (v{cand.approved_resume_version})
                                   </span>
                                 ) : (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200" title="Step 23 Placement Head certification required">
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200" title="Placement Head certification required">
                                     <Clock className="w-3 h-3 text-amber-600" />
                                     Readiness Pending
                                   </span>
@@ -927,7 +927,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
                     </table>
                   </div>
                   <p className="text-[11px] text-gqt-neutral-500 italic">
-                    Note: Uncertified candidates cannot be selected per authoritative Step 23 Gate rules.
+                    Note: Uncertified candidates cannot be selected per placement readiness policy.
                   </p>
                 </div>
               )}
@@ -965,7 +965,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <div className="flex items-center justify-between border-b pb-3">
               <div>
                 <span className="text-xs font-bold text-amber-600 uppercase tracking-wider">
-                  Workflow Step 27 Dispatch
+                  Direct Dispatch Protocol
                 </span>
                 <h3 className="text-lg font-bold text-gqt-navy">
                   Send Candidate Profiles to HR
@@ -1095,7 +1095,7 @@ export const CandidateSubmissionWorkspacePage: React.FC = () => {
             <div className="flex items-center justify-between border-b pb-3">
               <div>
                 <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
-                  Workflow Step 28 Acknowledgment
+                  Corporate Confirmation Log
                 </span>
                 <h3 className="text-lg font-bold text-gqt-navy">
                   Log Corporate Recruiter Receipt
