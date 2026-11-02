@@ -21,7 +21,7 @@ describe('Frontend Authentication Suite (Phase 1)', () => {
     sessionStorage.clear();
   });
 
-  it('renders login page with official branding, inputs, and accessible labels', () => {
+  it('renders login page with official branding, inputs, and accessible labels', async () => {
     vi.mocked(apiClient.get).mockResolvedValueOnce({ data: null });
 
     render(
@@ -32,10 +32,12 @@ describe('Frontend Authentication Suite (Phase 1)', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByLabelText(/Work Email Address/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Password$/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
-    expect(screen.getByText(/Forgot password\?/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Work Email Address/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/^Password$/i)).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
+      expect(screen.getByText(/Forgot password\?/i)).toBeInTheDocument();
+    });
   });
 
   it('displays client-side validation errors when invalid input is submitted', async () => {
