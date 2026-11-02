@@ -50,6 +50,11 @@ class BaseWhatsAppAdapter(ABC):
         raise ValidationError(f"Invalid phone number length ({len(cleaned)} digits): '{phone}'.")
 
     @abstractmethod
+    def validate_configuration(self) -> Dict[str, Any]:
+        """Validate whether provider credentials and webhook secrets are properly configured."""
+        pass
+
+    @abstractmethod
     def send_message(
         self,
         phone_number: str,
@@ -76,6 +81,14 @@ class BaseWhatsAppAdapter(ABC):
 
 class SimulatedWhatsAppAdapter(BaseWhatsAppAdapter):
     """Safe local development and test mode WhatsApp adapter."""
+
+    def validate_configuration(self) -> Dict[str, Any]:
+        return {
+            "valid": True,
+            "backend": "simulated",
+            "is_simulated": True,
+            "message": "Simulated local/test WhatsApp provider is active.",
+        }
 
     def send_message(
         self,
@@ -128,6 +141,27 @@ class MetaWhatsAppAdapter(BaseWhatsAppAdapter):
         self.verify_token = verify_token or getattr(settings, "WHATSAPP_WEBHOOK_VERIFY_TOKEN", "")
         self.app_secret = app_secret or getattr(settings, "WHATSAPP_WEBHOOK_APP_SECRET", "")
 
+    def validate_configuration(self) -> Dict[str, Any]:
+        has_token = bool(self.api_token)
+        has_phone_id = bool(self.phone_number_id)
+        has_verify = bool(self.verify_token)
+        has_secret = bool(self.app_secret)
+        is_valid = has_token and has_phone_id
+        return {
+            "valid": is_valid,
+            "backend": "meta",
+            "is_simulated": False,
+            "configured_api_token": has_token,
+            "configured_phone_number_id": has_phone_id,
+            "configured_verify_token": has_verify,
+            "configured_app_secret": has_secret,
+            "message": (
+                "Meta WhatsApp Cloud API configuration is complete."
+                if is_valid
+                else "Meta WhatsApp API credentials not configured in environment (WHATSAPP_API_TOKEN, WHATSAPP_PHONE_NUMBER_ID)."
+            ),
+        }
+
     def send_message(
         self,
         phone_number: str,
@@ -145,15 +179,18 @@ class MetaWhatsAppAdapter(BaseWhatsAppAdapter):
                 is_simulated=False,
             )
 
-        if not self.api_token or not self.phone_number_id:
+        # Validate configuration upfront
+        config_check = self.validate_configuration()
+        if not config_check["valid"]:
             logger.warning(
-                f"[WHATSAPP_UNCONFIGURED] [req:{correlation_id}] Live Meta API credentials not provisioned."
+                f"[WHATSAPP_UNCONFIGURED] [req:{correlation_id}] {config_check['message']}"
             )
             return ProviderDeliveryResult(
                 success=False,
                 status="FAILED",
-                error_message="Meta WhatsApp API credentials not configured in environment.",
+                error_message=config_check["message"],
                 is_simulated=False,
+                is_transient=False,
             )
 
         # In production with live credentials, HTTP call to graph.facebook.com would occur here

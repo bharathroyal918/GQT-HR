@@ -32,7 +32,8 @@ import {
   FileText,
   User as UserIcon,
   CheckCircle2,
-  TrendingUp,
+  Lock,
+  Zap,
 } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
@@ -44,7 +45,7 @@ export const DashboardPage: React.FC = () => {
   const isDesigner = hasRole('CREATIVE_DESIGNER') && !isAdmin && !hasRole('PLACEMENT_HEAD');
   const isTrainerOrEvaluator = hasAnyRole(['TRAINER', 'EVALUATOR']) && !isAdmin && !hasRole('PLACEMENT_HEAD');
 
-  // Fetch health probe only for admin dashboard
+  // Fetch health probe only for admin view
   const {
     data: health,
     isLoading: isHealthLoading,
@@ -53,9 +54,10 @@ export const DashboardPage: React.FC = () => {
   } = useQuery({
     queryKey: ['system-health'],
     queryFn: healthApi.getHealth,
-    enabled: isAdmin || !isAuthenticated,
+    enabled: isAuthenticated && isAdmin,
   });
 
+  // Admin All-Workspaces Directory
   const adminWorkspaces = [
     { category: 'CRM', name: 'Company Acquisition & Outreach', tag: 'Hiring Partners', href: '/crm', icon: Building2 },
     { category: 'Jobs', name: 'Job Requirements & Openings', tag: 'Verification', href: '/jobs', icon: Briefcase },
@@ -73,323 +75,329 @@ export const DashboardPage: React.FC = () => {
   ];
 
   // -------------------------------------------------------------
-  // 1. UNAUTHENTICATED / GUEST SHOWCASE & PORTAL LAUNCHPAD
+  // 1. PUBLIC / UNAUTHENTICATED GUEST SHOWCASE INDEX PAGE
   // -------------------------------------------------------------
   if (!isAuthenticated) {
     return (
-      <div className="space-y-10 pb-16">
-        {/* Hero Showcase Banner */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F294A] via-[#1B365D] to-[#0A2558] text-white p-8 sm:p-12 lg:p-16 shadow-xl border border-white/10">
-          <div className="absolute top-0 right-0 -mt-16 -mr-16 w-[480px] h-[480px] bg-gqt-blue/25 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="space-y-12 pb-16">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0F294A] via-[#1B365D] to-[#0A192F] text-white p-8 sm:p-14 shadow-2xl border border-white/10">
+          <div className="absolute top-0 right-0 -mt-16 -mr-16 w-96 h-96 bg-gqt-blue/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -mb-16 -ml-16 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
-              <Sparkles className="w-4 h-4 text-gqt-blue-accent" />
-              Global Quest Technologies &bull; Institutional HRMS &bull; v1.0.0
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-xs font-bold tracking-wide uppercase border border-white/20">
+              <Sparkles className="w-4 h-4 text-emerald-400" />
+              Global Quest Technologies HRMS Ecosystem
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
-              Enterprise Recruitment &amp; Placement Engine
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              Enterprise Institutional Placement &amp; Talent Operating System
             </h1>
 
-            <p className="text-sm sm:text-lg text-blue-100 max-w-2xl leading-relaxed">
-              The unified institutional talent ecosystem connecting corporate hiring partners, student candidate readiness, automated eligibility gates, and live recruitment operations.
+            <p className="text-base sm:text-lg text-blue-100/90 max-w-3xl leading-relaxed">
+              A unified recruitment platform orchestrating corporate hiring partner acquisition, deterministic candidate eligibility verification, multi-stage interview tracking, and transparent placement governance.
             </p>
 
-            {/* Direct Role Gateways Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            {/* Quick Access Gateway Buttons */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link to="/login/student">
-                <Button variant="secondary" size="lg" className="bg-white text-gqt-navy hover:bg-blue-50 font-bold shadow-md text-sm">
-                  <GraduationCap className="w-4 h-4 mr-2 text-emerald-600" />
-                  Candidate Student Portal
+                <Button variant="secondary" size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-md text-sm border-0">
+                  <GraduationCap className="w-5 h-5 mr-1.5" />
+                  Student Portal Login
                 </Button>
               </Link>
-              <Link to="/login/placement-head">
-                <Button variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/15 bg-white/5 font-semibold text-sm backdrop-blur-sm">
-                  <Award className="w-4 h-4 mr-2 text-blue-300" />
-                  Placement Operations Command
+              <Link to="/login/staff">
+                <Button variant="secondary" size="lg" className="bg-white hover:bg-blue-50 text-gqt-navy font-bold shadow-md text-sm">
+                  <Building2 className="w-5 h-5 mr-1.5 text-gqt-blue" />
+                  Placement Cell Login
                 </Button>
               </Link>
               <Link to="/login/admin">
-                <Button variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/15 bg-white/5 font-semibold text-sm backdrop-blur-sm">
-                  <ShieldCheck className="w-4 h-4 mr-2 text-indigo-300" />
+                <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 bg-transparent font-semibold text-sm">
+                  <ShieldCheck className="w-5 h-5 mr-1.5 text-indigo-300" />
                   Administrator Console
+                </Button>
+              </Link>
+              <Link to="/login/trainer">
+                <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 bg-transparent font-semibold text-sm">
+                  <Users className="w-5 h-5 mr-1.5 text-purple-300" />
+                  Trainer &amp; Evaluator
                 </Button>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Live Institutional Metrics Counter Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card className="bg-white/95 border-gqt-neutral-200">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-gqt-blue flex items-center justify-center shrink-0">
-                <Building2 className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-gqt-navy">500+</div>
-                <div className="text-xs font-semibold text-gqt-neutral-500 uppercase tracking-wider">
-                  Corporate Partners
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* 4 Interactive Portal Gateways */}
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gqt-neutral-200 pb-3">
+            <div>
+              <h2 className="text-xl font-extrabold text-gqt-navy">Role-Segregated Access Gateways</h2>
+              <p className="text-xs text-gqt-neutral-500 mt-0.5">
+                Each stakeholder logs into a dedicated workspace designed exclusively for their operational responsibilities.
+              </p>
+            </div>
+            <StatusBadge variant="info" label="Distinct Role URLs" />
+          </div>
 
-          <Card className="bg-white/95 border-gqt-neutral-200">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                <TrendingUp className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-gqt-navy">98.4%</div>
-                <div className="text-xs font-semibold text-gqt-neutral-500 uppercase tracking-wider">
-                  Placement Clearance
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* 1. Student Gateway Card */}
+            <div className="p-6 rounded-2xl border border-emerald-200/80 bg-gradient-to-b from-white to-emerald-50/40 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4 group">
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-2xs">
+                  <GraduationCap className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Candidate Portal</div>
+                  <h3 className="text-base font-bold text-gqt-navy group-hover:text-emerald-700 transition-colors">
+                    Student Candidate
+                  </h3>
+                  <p className="text-xs text-gqt-neutral-600 mt-1.5 leading-relaxed">
+                    View certified placement drives, upload verified resumes, track interview rounds, and accept corporate offers.
+                  </p>
+                </div>
+                <div className="space-y-1.5 text-xs text-gqt-neutral-600 pt-1">
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Real-time drive notifications</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>ATS resume benchmark scoring</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Multi-round interview schedules</span>
+                  </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
 
-          <Card className="bg-white/95 border-gqt-neutral-200">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                <Users className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-gqt-navy">25,000+</div>
-                <div className="text-xs font-semibold text-gqt-neutral-500 uppercase tracking-wider">
-                  Enrolled Candidates
+              <div className="pt-2">
+                <Link to="/login/student" className="block">
+                  <Button variant="primary" size="md" className="w-full justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">
+                    Launch Student Login <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </Link>
+                <div className="text-center mt-2">
+                  <Link to="/students/register" className="text-[11px] font-semibold text-emerald-700 hover:underline">
+                    New candidate registration &rarr;
+                  </Link>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
 
-          <Card className="bg-white/95 border-gqt-neutral-200">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                <Activity className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl font-black text-gqt-navy">100/Day</div>
-                <div className="text-xs font-semibold text-gqt-neutral-500 uppercase tracking-wider">
-                  Outreach Engine
+            {/* 2. Placement Head Gateway Card */}
+            <div className="p-6 rounded-2xl border border-blue-200/80 bg-gradient-to-b from-white to-blue-50/40 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4 group">
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-xl bg-blue-100 text-gqt-blue flex items-center justify-center group-hover:bg-gqt-blue group-hover:text-white transition-colors shadow-2xs">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-gqt-blue">Executive Authority</div>
+                  <h3 className="text-base font-bold text-gqt-navy group-hover:text-gqt-blue transition-colors">
+                    Placement Cell &amp; Head
+                  </h3>
+                  <p className="text-xs text-gqt-neutral-600 mt-1.5 leading-relaxed">
+                    Verify corporate requirements with 5-point checklist, sign off hiring drives, and manage candidate dispatch.
+                  </p>
+                </div>
+                <div className="space-y-1.5 text-xs text-gqt-neutral-600 pt-1">
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-gqt-blue" />
+                    <span>Authoritative 5-point job sign-off</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-gqt-blue" />
+                    <span>Candidate readiness gate certification</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-gqt-blue" />
+                    <span>Excel candidate roster dispatch</span>
+                  </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+
+              <div className="pt-2">
+                <Link to="/login/staff" className="block">
+                  <Button variant="primary" size="md" className="w-full justify-center bg-gqt-navy hover:bg-gqt-navy-light text-white font-bold text-xs">
+                    Launch Placement Login <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </Link>
+                <div className="text-center mt-2 text-[11px] text-gqt-neutral-400">
+                  URL: <code>/login/staff</code>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. System Administrator Gateway Card */}
+            <div className="p-6 rounded-2xl border border-indigo-200/80 bg-gradient-to-b from-white to-indigo-50/40 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4 group">
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center group-hover:bg-indigo-700 group-hover:text-white transition-colors shadow-2xs">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-indigo-700">Platform Governance</div>
+                  <h3 className="text-base font-bold text-gqt-navy group-hover:text-indigo-700 transition-colors">
+                    System Administrator
+                  </h3>
+                  <p className="text-xs text-gqt-neutral-600 mt-1.5 leading-relaxed">
+                    Full-platform governance, role-based access management, security audit history, and engine diagnostics.
+                  </p>
+                </div>
+                <div className="space-y-1.5 text-xs text-gqt-neutral-600 pt-1">
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>RBAC account provisioning</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>Live engine &amp; DB diagnostics</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
+                    <span>Interactive OpenAPI Swagger testing</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Link to="/login/admin" className="block">
+                  <Button variant="primary" size="md" className="w-full justify-center bg-indigo-700 hover:bg-indigo-800 text-white font-bold text-xs">
+                    Launch Admin Login <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </Link>
+                <div className="text-center mt-2 text-[11px] text-gqt-neutral-400">
+                  URL: <code>/login/admin</code>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Trainer & Evaluator Gateway Card */}
+            <div className="p-6 rounded-2xl border border-purple-200/80 bg-gradient-to-b from-white to-purple-50/40 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4 group">
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center group-hover:bg-purple-700 group-hover:text-white transition-colors shadow-2xs">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-purple-700">Mentorship Hub</div>
+                  <h3 className="text-base font-bold text-gqt-navy group-hover:text-purple-700 transition-colors">
+                    Trainer &amp; Evaluator
+                  </h3>
+                  <p className="text-xs text-gqt-neutral-600 mt-1.5 leading-relaxed">
+                    Evaluate candidate resumes against rubrics, conduct 1-on-1 mock interviews, and submit readiness ratings.
+                  </p>
+                </div>
+                <div className="space-y-1.5 text-xs text-gqt-neutral-600 pt-1">
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-purple-600" />
+                    <span>Structured mock interview scoring</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-purple-600" />
+                    <span>ATS resume rubric evaluations</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-purple-600" />
+                    <span>360° candidate readiness ratings</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Link to="/login/trainer" className="block">
+                  <Button variant="primary" size="md" className="w-full justify-center bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs">
+                    Launch Trainer Login <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                  </Button>
+                </Link>
+                <div className="text-center mt-2 text-[11px] text-gqt-neutral-400">
+                  URL: <code>/login/trainer</code>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* 3 Dedicated Role Gateways Showcase */}
-        <div>
-          <div className="mb-6 text-center max-w-2xl mx-auto">
-            <span className="text-xs font-bold text-gqt-blue uppercase tracking-widest">
-              Dedicated Role Access
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gqt-navy mt-1">
-              Select Your Workspace Portal
-            </h2>
-            <p className="text-xs sm:text-sm text-gqt-neutral-500 mt-1">
-              Every role has an isolated, purpose-built dashboard with tailored capabilities and secure permissions.
+        {/* Platform Architecture & Core Pillars */}
+        <div className="space-y-4">
+          <div className="border-b border-gqt-neutral-200 pb-3">
+            <h2 className="text-xl font-extrabold text-gqt-navy">Authoritative HRMS Platform Pillars</h2>
+            <p className="text-xs text-gqt-neutral-500 mt-0.5">
+              Built on strict corporate recruitment specifications and fail-closed enterprise security standards.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* 1. Student Portal Card */}
-            <div className="rounded-3xl border border-emerald-200 bg-gradient-to-b from-emerald-50/50 to-white p-7 shadow-xs flex flex-col justify-between hover:shadow-md transition-all group">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
-                    Candidate Portal
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gqt-navy group-hover:text-emerald-700 transition-colors">
-                    Student Candidate
-                  </h3>
-                  <p className="text-xs text-gqt-neutral-600 mt-1 leading-relaxed">
-                    Personalized portal for browsing campus recruitment drives, optimizing resumes with ATS feedback, completing practice assessments, and responding to offers.
-                  </p>
-                </div>
-                <ul className="text-xs text-gqt-neutral-600 space-y-2 pt-2 border-t border-emerald-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Verified campus placement drives</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>ATS resume scoring &amp; document vault</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Real-time interview pipeline tracking</span>
-                  </li>
-                </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="p-5 space-y-2 border-t-4 border-t-gqt-blue">
+              <div className="flex items-center gap-2 text-gqt-blue font-bold text-xs uppercase tracking-wider">
+                <Building2 className="w-4 h-4" />
+                Corporate CRM
               </div>
+              <h4 className="font-bold text-sm text-gqt-navy">100+ Touchpoints / Day</h4>
+              <p className="text-xs text-gqt-neutral-500 leading-relaxed">
+                Automated outreach logs, company tiers (Tier-1, Tier-2, Startup), decision-maker HR contacts, and follow-up escalations.
+              </p>
+            </Card>
 
-              <div className="pt-6">
-                <Link to="/login/student" className="block">
-                  <Button variant="primary" className="w-full justify-center bg-emerald-600 hover:bg-emerald-700 font-bold text-xs py-2.5 shadow-xs">
-                    Sign In as Student (/login/student)
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                  </Button>
-                </Link>
+            <Card className="p-5 space-y-2 border-t-4 border-t-emerald-500">
+              <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider">
+                <ShieldCheck className="w-4 h-4" />
+                Verification Gate
               </div>
-            </div>
+              <h4 className="font-bold text-sm text-gqt-navy">5-Point Checklist Audit</h4>
+              <p className="text-xs text-gqt-neutral-500 leading-relaxed">
+                Mandatory verification of eligibility cutoffs, CTC authenticity, company legitimacy, selection rounds, and registration deadlines.
+              </p>
+            </Card>
 
-            {/* 2. Placement Head Card */}
-            <div className="rounded-3xl border border-blue-200 bg-gradient-to-b from-blue-50/50 to-white p-7 shadow-xs flex flex-col justify-between hover:shadow-md transition-all group">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-100 text-gqt-blue flex items-center justify-center">
-                    <Award className="w-6 h-6" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-100 text-gqt-blue">
-                    Placement Office
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gqt-navy group-hover:text-gqt-blue transition-colors">
-                    Placement Head &amp; Staff
-                  </h3>
-                  <p className="text-xs text-gqt-neutral-600 mt-1 leading-relaxed">
-                    Operations command center for corporate hiring partner relationships, 5-point job description verification, readiness gate certification, and dispatch.
-                  </p>
-                </div>
-                <ul className="text-xs text-gqt-neutral-600 space-y-2 pt-2 border-t border-blue-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-gqt-blue shrink-0" />
-                    <span>Corporate CRM &amp; 100/day outreach logs</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-gqt-blue shrink-0" />
-                    <span>5-point job requirement sign-off</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-gqt-blue shrink-0" />
-                    <span>Readiness gate certification &amp; offers</span>
-                  </li>
-                </ul>
+            <Card className="p-5 space-y-2 border-t-4 border-t-indigo-500">
+              <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider">
+                <Zap className="w-4 h-4" />
+                Eligibility Engine
               </div>
+              <h4 className="font-bold text-sm text-gqt-navy">Deterministic Screening</h4>
+              <p className="text-xs text-gqt-neutral-500 leading-relaxed">
+                Automated matching of academic GPA, graduation batch, active backlogs, and certified resume credentials.
+              </p>
+            </Card>
 
-              <div className="pt-6">
-                <Link to="/login/placement-head" className="block">
-                  <Button variant="primary" className="w-full justify-center bg-gqt-navy hover:bg-gqt-navy-light font-bold text-xs py-2.5 shadow-xs">
-                    Sign In as Placement Head (/login/placement-head)
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                  </Button>
-                </Link>
+            <Card className="p-5 space-y-2 border-t-4 border-t-purple-500">
+              <div className="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider">
+                <Award className="w-4 h-4" />
+                Placement Lifecycle
               </div>
-            </div>
-
-            {/* 3. System Administrator Card */}
-            <div className="rounded-3xl border border-indigo-200 bg-gradient-to-b from-indigo-50/50 to-white p-7 shadow-xs flex flex-col justify-between hover:shadow-md transition-all group">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
-                    <ShieldCheck className="w-6 h-6" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-800">
-                    Superuser Admin
-                  </span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gqt-navy group-hover:text-indigo-700 transition-colors">
-                    System Administrator
-                  </h3>
-                  <p className="text-xs text-gqt-neutral-600 mt-1 leading-relaxed">
-                    Executive administration console with multi-role RBAC access governance, engine liveness probes, database sync reconciliation, and OpenAPI docs.
-                  </p>
-                </div>
-                <ul className="text-xs text-gqt-neutral-600 space-y-2 pt-2 border-t border-indigo-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0" />
-                    <span>User RBAC accounts &amp; security audits</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0" />
-                    <span>PostgreSQL &amp; cache engine diagnostics</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600 shrink-0" />
-                    <span>OpenAPI Swagger schema integration</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-6">
-                <Link to="/login/admin" className="block">
-                  <Button variant="primary" className="w-full justify-center bg-indigo-900 hover:bg-indigo-800 font-bold text-xs py-2.5 shadow-xs">
-                    Sign In as Administrator (/login/admin)
-                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+              <h4 className="font-bold text-sm text-gqt-navy">Offers to Joining</h4>
+              <p className="text-xs text-gqt-neutral-500 leading-relaxed">
+                Batch roster dispatch, multi-round interview tracking, offer letter ingestion, student acceptance, and joining audits.
+              </p>
+            </Card>
           </div>
         </div>
 
-        {/* Platform Architecture & Invariants Grid */}
-        <div className="border-t border-gqt-neutral-200/80 pt-10">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <h3 className="text-lg font-bold text-gqt-navy">Platform Architectural Invariants</h3>
-              <p className="text-xs text-gqt-neutral-500">Built on strict 5-layer separation and verified security foundations.</p>
+        {/* Security & System Compliance Footer Strip */}
+        <div className="rounded-2xl p-6 bg-white border border-gqt-neutral-200 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <Lock className="w-5 h-5" />
             </div>
-            <StatusBadge variant="success" label="147 Vitest Tests Passing" />
+            <div>
+              <h5 className="font-bold text-xs text-gqt-navy uppercase tracking-wider">Enterprise Security Baseline</h5>
+              <p className="text-xs text-gqt-neutral-500 mt-0.5">
+                256-Bit TLS &bull; HttpOnly Cookie Authentication &bull; Strict Role Isolation &bull; Audit Trail Immutability
+              </p>
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-4 space-y-2">
-                <div className="flex items-center gap-2 text-gqt-blue font-bold text-xs">
-                  <Server className="w-4 h-4" />
-                  <span>Django 5.1 Backend</span>
-                </div>
-                <p className="text-xs text-gqt-neutral-500">
-                  5-Layer DRF architecture with domain selectors, services, and isolated REST serializers.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4 space-y-2">
-                <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Fail-Closed Security</span>
-                </div>
-                <p className="text-xs text-gqt-neutral-500">
-                  HttpOnly cookie JWT authentication, CORS strict domain guards, and sensitive data redaction.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4 space-y-2">
-                <div className="flex items-center gap-2 text-purple-600 font-bold text-xs">
-                  <Layers className="w-4 h-4" />
-                  <span>PostgreSQL Engine</span>
-                </div>
-                <p className="text-xs text-gqt-neutral-500">
-                  Psycopg 3.2+ driver with connection pooler and automated database reconciliation audits.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4 space-y-2">
-                <div className="flex items-center gap-2 text-amber-600 font-bold text-xs">
-                  <Terminal className="w-4 h-4" />
-                  <span>OpenAPI Swagger</span>
-                </div>
-                <p className="text-xs text-gqt-neutral-500">
-                  drf-spectacular auto-generated OpenAPI 3.0 schema and interactive endpoint documentation.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="flex items-center gap-2">
+            <a href="/api/v1/schema/swagger/" target="_blank" rel="noopener noreferrer">
+              <Button size="sm" variant="outline" className="text-xs font-semibold">
+                OpenAPI 3.0 Documentation
+              </Button>
+            </a>
+            <Link to="/login">
+              <Button size="sm" variant="primary" className="text-xs font-bold bg-gqt-navy">
+                Access HRMS Portal
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -397,30 +405,28 @@ export const DashboardPage: React.FC = () => {
   }
 
   // -------------------------------------------------------------
-  // 2. AUTHENTICATED STUDENT CANDIDATE VIEW
+  // 2. AUTHENTICATED: STUDENT CAREER PORTAL DASHBOARD
   // -------------------------------------------------------------
   if (isStudent) {
     return (
       <div className="space-y-8 pb-12">
         {/* Student Welcome Banner */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#062019] via-[#064E3B] to-[#047857] text-white p-8 sm:p-12 shadow-lg border border-emerald-500/30">
-          <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-emerald-400/15 rounded-full blur-3xl pointer-events-none" />
-
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gqt-navy via-slate-900 to-gqt-blue text-white p-8 sm:p-10 shadow-lg border border-gqt-navy/40">
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-              Candidate Career Hub &bull; Active Cohort
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold tracking-wide uppercase border border-white/20">
+              <Sparkles className="w-3.5 h-3.5 text-gqt-blue-accent" />
+              Student Candidate Career Portal
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
               Welcome back, {user?.full_name || 'Candidate'}!
             </h1>
-            <p className="text-sm sm:text-base text-emerald-100 max-w-2xl leading-relaxed">
-              Explore verified campus recruitment drives, review resume ATS feedback, complete practice assessments, and manage your interview pipeline.
+            <p className="text-sm sm:text-base text-blue-100 max-w-2xl leading-relaxed">
+              Explore verified campus placement drives, prepare with resume &amp; assessment feedback, monitor your interview schedules, and respond to official placement offers.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link to="/students/drives">
-                <Button variant="secondary" size="md" className="bg-white text-emerald-950 hover:bg-emerald-50 font-bold shadow-xs">
-                  <Briefcase className="w-4 h-4 mr-1.5 text-emerald-700" />
+                <Button variant="secondary" size="md" className="bg-white text-gqt-navy hover:bg-blue-50 font-bold shadow-xs">
+                  <Briefcase className="w-4 h-4 mr-1.5 text-gqt-blue" />
                   Browse Placement Drives
                 </Button>
               </Link>
@@ -440,36 +446,7 @@ export const DashboardPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Candidate Preparation Journey Bar */}
-        <div className="p-4 rounded-2xl bg-white border border-gqt-neutral-200/90 shadow-2xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gqt-neutral-100">
-            <span className="text-xs font-bold text-gqt-navy uppercase tracking-wider flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              Placement Readiness Milestones
-            </span>
-            <span className="text-xs text-gqt-neutral-500">Accredited by GQT Placement Cell</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-3 text-xs">
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-emerald-50/70 border border-emerald-200 text-emerald-900 font-semibold">
-              <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">1</span>
-              <span>Profile &amp; Resume Active</span>
-            </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-blue-50/70 border border-blue-200 text-blue-900 font-semibold">
-              <span className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">2</span>
-              <span>Placement Verified</span>
-            </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-purple-50/70 border border-purple-200 text-purple-900 font-semibold">
-              <span className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">3</span>
-              <span>Mock Interview Drills</span>
-            </div>
-            <div className="flex items-center gap-2 p-2 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 font-semibold">
-              <span className="w-5 h-5 rounded-full bg-amber-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">4</span>
-              <span>Active Drive Selection</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 4 Primary Action Cards */}
+        {/* 4 Primary Student Action Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link
             to="/students/drives"
@@ -479,7 +456,7 @@ export const DashboardPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-blue-50 text-gqt-blue flex items-center justify-center group-hover:bg-gqt-blue group-hover:text-white transition-colors">
                 <Briefcase className="w-5 h-5" />
               </div>
-              <StatusBadge variant="info" label="Verified Drives" showDot={false} />
+              <StatusBadge variant="info" label="Active Drives" showDot={false} />
             </div>
             <div>
               <h3 className="font-bold text-sm text-gqt-navy group-hover:text-gqt-blue transition-colors">
@@ -525,7 +502,7 @@ export const DashboardPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition-colors">
                 <Calendar className="w-5 h-5" />
               </div>
-              <StatusBadge variant="warning" label="Interview Rounds" showDot={false} />
+              <StatusBadge variant="warning" label="Pipeline" showDot={false} />
             </div>
             <div>
               <h3 className="font-bold text-sm text-gqt-navy group-hover:text-gqt-blue transition-colors">
@@ -564,7 +541,7 @@ export const DashboardPage: React.FC = () => {
           </Link>
         </div>
 
-        {/* Student Preparation & Feedback Hub */}
+        {/* Candidate Readiness & Practice Workspaces */}
         <Card>
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -646,15 +623,15 @@ export const DashboardPage: React.FC = () => {
   }
 
   // -------------------------------------------------------------
-  // 3. AUTHENTICATED PLACEMENT HEAD VIEW
+  // 3. AUTHENTICATED: PLACEMENT HEAD VIEW
   // -------------------------------------------------------------
   if (isPlacementHead) {
     return (
       <div className="space-y-8 pb-12">
         {/* Placement Head Hero */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-gqt-navy to-indigo-900 text-white p-8 sm:p-12 shadow-lg border border-gqt-navy/40">
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-gqt-navy to-indigo-900 text-white p-8 sm:p-10 shadow-lg border border-gqt-navy/40">
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold tracking-wide uppercase border border-white/20">
               <Award className="w-3.5 h-3.5 text-amber-400" />
               Executive Placement Office
             </div>
@@ -844,14 +821,14 @@ export const DashboardPage: React.FC = () => {
   }
 
   // -------------------------------------------------------------
-  // 4. CREATIVE DESIGNER VIEW
+  // 4. AUTHENTICATED: CREATIVE DESIGNER VIEW
   // -------------------------------------------------------------
   if (isDesigner) {
     return (
       <div className="space-y-8 pb-12">
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-900 text-white p-8 sm:p-12 shadow-lg border border-purple-800/40">
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-900 text-white p-8 sm:p-10 shadow-lg border border-purple-800/40">
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold tracking-wide uppercase border border-white/20">
               <Palette className="w-3.5 h-3.5 text-purple-300" />
               Creative Studio
             </div>
@@ -859,7 +836,7 @@ export const DashboardPage: React.FC = () => {
               Recruitment Media &amp; Design Studio
             </h1>
             <p className="text-sm sm:text-base text-purple-100 max-w-2xl leading-relaxed">
-              Design branded promotional campaign assets, verify creative specifications, and manage graphic revision queues.
+              Design and deliver branded promotional campaign assets, verify creative specifications, and manage graphic revision queues.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link to="/creatives/my-tasks">
@@ -886,14 +863,14 @@ export const DashboardPage: React.FC = () => {
   }
 
   // -------------------------------------------------------------
-  // 5. TRAINER / EVALUATOR VIEW
+  // 5. AUTHENTICATED: TRAINER / EVALUATOR VIEW
   // -------------------------------------------------------------
   if (isTrainerOrEvaluator) {
     return (
       <div className="space-y-8 pb-12">
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-8 sm:p-12 shadow-lg border border-teal-800/40">
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-8 sm:p-10 shadow-lg border border-teal-800/40">
           <div className="relative z-10 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold tracking-wide uppercase border border-white/20">
               <Users className="w-3.5 h-3.5 text-emerald-300" />
               Candidate Training &amp; Mentorship Hub
             </div>
@@ -933,16 +910,16 @@ export const DashboardPage: React.FC = () => {
   }
 
   // -------------------------------------------------------------
-  // 6. SYSTEM ADMINISTRATOR VIEW (Default / Fallback for ADMIN)
+  // 6. AUTHENTICATED: SYSTEM ADMINISTRATOR VIEW (Default for ADMIN)
   // -------------------------------------------------------------
   return (
     <div className="space-y-8 pb-12">
       {/* Administrator Hero Welcome Banner */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-gqt-navy via-gqt-navy-light to-gqt-blue text-white p-8 sm:p-12 shadow-lg border border-gqt-navy/40">
+      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gqt-navy via-gqt-navy-light to-gqt-blue text-white p-8 sm:p-10 shadow-lg border border-gqt-navy/40">
         <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide uppercase border border-white/20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold tracking-wide uppercase border border-white/20">
             <Sparkles className="w-3.5 h-3.5 text-gqt-blue-accent" />
-            Enterprise Talent Management &bull; Superuser Console
+            Enterprise Talent Management &bull; Superuser
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
             GQT HRMS Administration Console
@@ -1046,12 +1023,12 @@ export const DashboardPage: React.FC = () => {
                 <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
                   <Terminal className="w-5 h-5" />
                 </div>
-                <StatusBadge variant="success" label="147 Tests Passing" />
+                <StatusBadge variant="info" label="Verified Architecture" />
               </div>
               <div>
-                <h4 className="text-base font-bold text-gqt-charcoal">Automated QA Suites</h4>
+                <h4 className="text-base font-bold text-gqt-charcoal">System Integrity</h4>
                 <p className="text-xs text-gqt-neutral-500 mt-1">
-                  Backend Pytest automated test suite and frontend Vitest component tests with TypeScript strict compiler checks.
+                  Modular Django DRF service layer, PostgreSQL database constraints, and TypeScript strict compiler checks.
                 </p>
               </div>
             </CardContent>

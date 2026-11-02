@@ -2,7 +2,7 @@
 import logging
 import uuid
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Any, Dict, Optional
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -25,6 +25,11 @@ class BaseEmailAdapter(ABC):
         return cleaned
 
     @abstractmethod
+    def validate_configuration(self) -> Dict[str, Any]:
+        """Validate whether provider credentials and host settings are properly configured."""
+        pass
+
+    @abstractmethod
     def send_email(
         self,
         recipient: str,
@@ -42,6 +47,14 @@ class SimulatedEmailAdapter(BaseEmailAdapter):
 
     Never attempts external SMTP network connections and marks result as SIMULATED.
     """
+
+    def validate_configuration(self) -> Dict[str, Any]:
+        return {
+            "valid": True,
+            "backend": "simulated",
+            "is_simulated": True,
+            "message": "Simulated local/test email provider is active.",
+        }
 
     def send_email(
         self,
@@ -78,6 +91,27 @@ class SimulatedEmailAdapter(BaseEmailAdapter):
 class DjangoSMTPEmailAdapter(BaseEmailAdapter):
     """Standard Django SMTP provider adapter using configured email backend."""
 
+    def validate_configuration(self) -> Dict[str, Any]:
+        host = getattr(settings, "EMAIL_HOST", "")
+        port = getattr(settings, "EMAIL_PORT", 0)
+        from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "")
+        # A valid external production SMTP configuration must specify an external host and port
+        is_valid = bool(host and host not in ("", "localhost", "127.0.0.1") and port)
+        return {
+            "valid": is_valid,
+            "backend": "smtp",
+            "is_simulated": False,
+            "configured_host": bool(host and host not in ("", "localhost", "127.0.0.1")),
+            "configured_port": bool(port),
+            "configured_from_email": bool(from_email),
+            "configured_auth": bool(getattr(settings, "EMAIL_HOST_USER", "")),
+            "message": (
+                "SMTP configuration is complete."
+                if is_valid
+                else "Missing external SMTP settings (EMAIL_HOST must be a valid external SMTP server)."
+            ),
+        }
+
     def send_email(
         self,
         recipient: str,
@@ -94,6 +128,20 @@ class DjangoSMTPEmailAdapter(BaseEmailAdapter):
                 status="FAILED",
                 error_message=str(e.message if hasattr(e, "message") else e),
                 is_simulated=False,
+            )
+
+        # Validate SMTP configuration before attempting socket network connection
+        config_check = self.validate_configuration()
+        if not config_check["valid"]:
+            logger.warning(
+                f"[SMTP_UNCONFIGURED] [req:{correlation_id}] {config_check['message']}"
+            )
+            return ProviderDeliveryResult(
+                success=False,
+                status="FAILED",
+                error_message=config_check["message"],
+                is_simulated=False,
+                is_transient=False,
             )
 
         from_email = getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@gqt.internal")
