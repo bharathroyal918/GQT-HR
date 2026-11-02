@@ -93,7 +93,11 @@ export const App: React.FC = () => {
                 {/* Public Authentication Routes */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/login/:role" element={<LoginPage />} />
-                <Route path="/auth/login" element={<LoginPage />} />
+                <Route path="/admin/login" element={<LoginPage />} />
+                <Route path="/student/login" element={<LoginPage />} />
+                <Route path="/staff/login" element={<LoginPage />} />
+                <Route path="/placement/login" element={<LoginPage />} />
+                <Route path="/trainer/login" element={<LoginPage />} />
                 <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/access-denied" element={<AccessDeniedPage />} />
