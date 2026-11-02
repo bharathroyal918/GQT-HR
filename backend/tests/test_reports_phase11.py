@@ -195,7 +195,7 @@ def sample_job(db, sample_company, sample_hr_contact, admin_user):
         location="Bangalore",
         min_salary=Decimal("600000"),
         max_salary=Decimal("900000"),
-        registration_deadline=date.today() + timedelta(days=14),
+        registration_deadline=timezone.now() + timedelta(days=14),
         status=JobRequirementStatus.APPROVED,
         created_by=admin_user,
     )
