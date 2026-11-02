@@ -339,7 +339,7 @@ describe('Phase 13: Continuous Improvement Hub Frontend', () => {
   it('1. Renders Hub Header with Phase 13 Brand Badges and Zero-AI Safeguard', async () => {
     renderComponent();
     expect(screen.getByText('Continuous Improvement Hub')).toBeInTheDocument();
-    expect(screen.getByText('Phase 13: Continuous Improvement')).toBeInTheDocument();
+    expect(screen.getByText('Continuous Improvement & Strategic Planning')).toBeInTheDocument();
     expect(screen.getByText('Deterministic / Zero AI')).toBeInTheDocument();
     expect(screen.getByText('Placement Head Gate')).toBeInTheDocument();
   });

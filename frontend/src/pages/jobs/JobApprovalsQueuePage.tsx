@@ -84,7 +84,7 @@ export const JobApprovalsQueuePage: React.FC = () => {
           Back to Requirements Directory
         </Link>
         <span className="text-xs text-gqt-neutral-500 font-mono">
-          Workflow Steps 6 & 7: Operational Queues
+          Verification & Approval Queues
         </span>
       </div>
 
@@ -110,7 +110,7 @@ export const JobApprovalsQueuePage: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-amber-700 flex items-center gap-1.5">
-              <Clock className="w-4 h-4" /> Step 6: Checklist Audit Queue
+              <Clock className="w-4 h-4" /> Checklist Audit Queue
             </span>
             <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-white text-gqt-navy border border-gqt-neutral-200">
               {verificationQueue?.meta?.count || 0}
@@ -132,7 +132,7 @@ export const JobApprovalsQueuePage: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4" /> Step 7: Head Approval Queue
+              <CheckCircle2 className="w-4 h-4" /> Head Approval Queue
             </span>
             <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-white text-gqt-navy border border-gqt-neutral-200">
               {signoffQueue?.meta?.count || 0}
@@ -140,7 +140,7 @@ export const JobApprovalsQueuePage: React.FC = () => {
           </div>
           <h3 className="text-lg font-bold text-gqt-navy mt-2">Awaiting Placement Head Sign-Off</h3>
           <p className="text-xs text-gqt-neutral-600 mt-1">
-            Opportunities where all 5 mandatory criteria evaluate to 100% verified, pending executive sign-off to lock for Phase 4 design creatives.
+            Opportunities where all 5 mandatory criteria evaluate to 100% verified, pending executive sign-off to lock for design creatives.
           </p>
         </button>
       </div>

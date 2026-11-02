@@ -238,7 +238,7 @@ describe('Feedback Collection Workspace (Phase 9)', () => {
     renderWithProviders(<FeedbackWorkspacePage />);
 
     expect(await screen.findByText('Feedback Collection Workspace')).toBeInTheDocument();
-    expect(screen.getByText('Phase 9')).toBeInTheDocument();
+    expect(screen.getByText('360° Review')).toBeInTheDocument();
 
     // Verify KPI summary cards
     expect(await screen.findByText('Student Feedback')).toBeInTheDocument();

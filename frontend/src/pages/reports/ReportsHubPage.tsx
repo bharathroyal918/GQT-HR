@@ -215,7 +215,7 @@ export const ReportsHubPage: React.FC = () => {
               </span>
               <h1 className="text-3xl font-extrabold tracking-tight">Personal Placement & Readiness Report</h1>
               <p className="text-gqt-neutral-200 mt-1 max-w-2xl text-sm">
-                Real-time tracking of your institutional academic verification, Step 23 Placement Readiness Certification, interview participation, and offer status.
+                Real-time tracking of your institutional academic verification, Placement Readiness Certification, interview participation, and offer status.
               </p>
             </div>
             <Button
@@ -279,7 +279,7 @@ export const ReportsHubPage: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-sm py-1 border-b border-gqt-neutral-100">
-                  <span className="text-gqt-neutral-500 font-medium">Step 23 Readiness Gate</span>
+                  <span className="text-gqt-neutral-500 font-medium">Readiness Gate</span>
                   <span
                     className={`inline-flex px-2 py-0.5 rounded text-xs font-semibold ${
                       studentSelfData.is_readiness_certified
@@ -436,7 +436,7 @@ export const ReportsHubPage: React.FC = () => {
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20">
                 <BarChart3 className="w-3.5 h-3.5" />
-                Phase 11 Production Analytics
+                Enterprise Analytics
               </span>
               {isAuditor && (
                 <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-400 text-gqt-navy">
@@ -765,7 +765,7 @@ export const ReportsHubPage: React.FC = () => {
                 onChange={(e) => setStudentCertified(e.target.value)}
                 className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gqt-neutral-300 bg-white text-gqt-navy"
               >
-                <option value="ALL">Step 23 Gate: All</option>
+                <option value="ALL">Readiness Gate: All</option>
                 <option value="TRUE">Certified Only</option>
                 <option value="FALSE">Non-Certified Only</option>
               </select>
@@ -802,7 +802,7 @@ export const ReportsHubPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-4 rounded-xl bg-white border border-gqt-neutral-200 shadow-sm">
-                  <span className="text-xs font-semibold text-gqt-neutral-500 uppercase">Step 23 Certified</span>
+                  <span className="text-xs font-semibold text-gqt-neutral-500 uppercase">Readiness Certified</span>
                   <div className="text-2xl font-black text-blue-700 mt-1">
                     {studentData.summary.total_readiness_certified}{' '}
                     <span className="text-xs font-bold text-gqt-neutral-500">({studentData.summary.readiness_certified_rate}%)</span>
@@ -961,16 +961,16 @@ export const ReportsHubPage: React.FC = () => {
           {isLoading ? (
             <div className="py-20 text-center text-gqt-neutral-500">
               <RefreshCw className="w-8 h-8 animate-spin mx-auto text-gqt-blue mb-2" />
-              Loading Step 36–41 placement lifecycle records...
+              Loading placement lifecycle records...
             </div>
           ) : placementData ? (
             <>
-              {/* Step 36-41 Life-Cycle Cards */}
+              {/* Placement Life-Cycle Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Final Result Card */}
                 <Card className="shadow-sm border-gqt-neutral-200">
                   <CardHeader className="bg-gqt-neutral-50/70 border-b border-gqt-neutral-200 pb-2">
-                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Step 36: Final Result Status</h4>
+                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Final Result Status</h4>
                   </CardHeader>
                   <CardContent className="p-4 space-y-2">
                     <div className="flex justify-between items-center text-xs">
@@ -995,7 +995,7 @@ export const ReportsHubPage: React.FC = () => {
                 {/* Offer Letter Lifecycle Card */}
                 <Card className="shadow-sm border-gqt-neutral-200">
                   <CardHeader className="bg-gqt-neutral-50/70 border-b border-gqt-neutral-200 pb-2">
-                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Step 38: Offer Letter Lifecycle</h4>
+                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Offer Letter Lifecycle</h4>
                   </CardHeader>
                   <CardContent className="p-4 space-y-2">
                     <div className="flex justify-between items-center text-xs">
@@ -1020,7 +1020,7 @@ export const ReportsHubPage: React.FC = () => {
                 {/* Joining Outcome Card */}
                 <Card className="shadow-sm border-gqt-neutral-200">
                   <CardHeader className="bg-gqt-neutral-50/70 border-b border-gqt-neutral-200 pb-2">
-                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Step 40: Joining Outcomes</h4>
+                    <h4 className="text-xs font-bold text-gqt-navy uppercase tracking-wider">Joining Outcomes</h4>
                   </CardHeader>
                   <CardContent className="p-4 space-y-2">
                     <div className="flex justify-between items-center text-xs">

@@ -79,7 +79,7 @@ export const CreativeReviewQueuePage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
             <Layers className="w-6 h-6 text-[#005BBB]" />
-            Creative Review & Approval Queues (Step 9)
+            Creative Review & Approval Queues
           </h1>
           <p className="text-sm text-slate-600 mt-1">
             Dedicated operational review streams for 4-point design verification and Placement Head sign-offs.

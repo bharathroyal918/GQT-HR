@@ -263,7 +263,7 @@ describe('Placement Management Workspace (Workflow Steps 36–41)', () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     expect(await screen.findByText('Placement Management')).toBeInTheDocument();
-    expect(screen.getByText('Phase 8: Placement Management & Tracking (Workflow Steps 36–41)')).toBeInTheDocument();
+    expect(screen.getByText('Placement Operations & Verification')).toBeInTheDocument();
 
     // Verify KPI Cards
     expect(await screen.findByText('Total Results')).toBeInTheDocument();
@@ -287,10 +287,10 @@ describe('Placement Management Workspace (Workflow Steps 36–41)', () => {
 
     // Open Update Status Modal
     fireEvent.click(updateButtons[0]!);
-    expect(await screen.findByText('Update Candidate Status (Step 37)')).toBeInTheDocument();
+    expect(await screen.findByText('Update Candidate Status')).toBeInTheDocument();
   });
 
-  it('allows opening the Student Notification modal (Step 38)', async () => {
+  it('allows opening the Student Notification modal', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     expect(await screen.findByText('Aarav Sharma')).toBeInTheDocument();
@@ -299,29 +299,29 @@ describe('Placement Management Workspace (Workflow Steps 36–41)', () => {
     expect(notifyButtons.length).toBeGreaterThan(0);
 
     fireEvent.click(notifyButtons[0]!);
-    expect(await screen.findByText('Notify Candidate (Step 38)')).toBeInTheDocument();
+    expect(await screen.findByText('Notify Candidate')).toBeInTheDocument();
     expect(screen.getByText('Direct Institutional Email')).toBeInTheDocument();
   });
 
-  it('allows staff to upload an official offer letter PDF (Step 39)', async () => {
+  it('allows staff to upload an official offer letter PDF', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     expect(await screen.findByText('Aarav Sharma')).toBeInTheDocument();
 
-    const offerButton = screen.getByTitle('Upload Official Offer Letter (Step 39)');
+    const offerButton = screen.getByTitle('Upload Official Offer Letter');
     fireEvent.click(offerButton);
 
-    expect(await screen.findByText('Upload Official Offer Letter (Step 39)')).toBeInTheDocument();
+    expect(await screen.findByText('Upload Official Offer Letter')).toBeInTheDocument();
     expect(screen.getByText(/Offer Letter PDF Document \* \(Max 5MB\)/i)).toBeInTheDocument();
   });
 
-  it('switches to Offer Letters & Acceptance tab and shows response status (Step 40)', async () => {
+  it('switches to Offer Letters & Acceptance tab and shows response status', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     const offersTab = await screen.findByRole('button', { name: /Offer Letters & Acceptance/i });
     fireEvent.click(offersTab);
 
-    expect(await screen.findByText('Offer Letters & Response Lifecycle (Steps 39 & 40)')).toBeInTheDocument();
+    expect(await screen.findByText('Offer Letters & Response Lifecycle')).toBeInTheDocument();
     expect(screen.getByText('techcorp_offer_aarav.pdf')).toBeInTheDocument();
     expect(screen.getByText('Pending Candidate Response')).toBeInTheDocument();
 
@@ -329,44 +329,44 @@ describe('Placement Management Workspace (Workflow Steps 36–41)', () => {
     const recordResponseBtn = screen.getByRole('button', { name: /Record Response/i });
     fireEvent.click(recordResponseBtn);
 
-    expect(await screen.findByText('Record Offer Decision (Step 40)')).toBeInTheDocument();
+    expect(await screen.findByText('Record Offer Decision')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Accept Offer/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Decline Offer/i })).toBeInTheDocument();
   });
 
-  it('switches to Joining Verification tab and verifies joining status (Step 41)', async () => {
+  it('switches to Joining Verification tab and verifies joining status', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     const joiningTab = await screen.findByRole('button', { name: /Joining Verification/i });
     fireEvent.click(joiningTab);
 
-    expect(await screen.findByText('Joining Status & Candidate Reporting (Step 41)')).toBeInTheDocument();
+    expect(await screen.findByText('Joining Status & Candidate Reporting')).toBeInTheDocument();
 
     const verifyBtn = screen.getByRole('button', { name: /Verify Status/i });
     fireEvent.click(verifyBtn);
 
-    expect(await screen.findByText('Verify Candidate Joining (Step 41)')).toBeInTheDocument();
+    expect(await screen.findByText('Verify Candidate Joining')).toBeInTheDocument();
     expect(screen.getByText('Joining Outcome *')).toBeInTheDocument();
   });
 
-  it('switches to Intake Batches tab and lists historical final result batches (Step 36)', async () => {
+  it('switches to Intake Batches tab and lists historical final result batches', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     const intakesTab = await screen.findByRole('button', { name: /Intake Batches/i });
     fireEvent.click(intakesTab);
 
-    expect(await screen.findByText('Final Result Ingestion Batches (Step 36)')).toBeInTheDocument();
+    expect(await screen.findByText('Final Result Ingestion Batches')).toBeInTheDocument();
     expect(screen.getByText('RES-20261027-A1B2')).toBeInTheDocument();
     expect(screen.getByText('Corporate HR Email')).toBeInTheDocument();
   });
 
-  it('opens Ingest Final Results modal and populates participating candidates (Step 36)', async () => {
+  it('opens Ingest Final Results modal and populates participating candidates', async () => {
     renderWithProviders(<PlacementWorkspacePage />);
 
     const ingestBtn = await screen.findByRole('button', { name: /Ingest Final Results/i });
     fireEvent.click(ingestBtn);
 
-    expect(await screen.findByText('Ingest Final Results from Corporate HR (Step 36)')).toBeInTheDocument();
+    expect(await screen.findByText('Ingest Final Results from Corporate HR')).toBeInTheDocument();
     expect(screen.getByText('Approved Recruitment Drive *')).toBeInTheDocument();
   });
 

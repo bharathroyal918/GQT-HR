@@ -109,13 +109,13 @@ export const PlacementReadinessGatePage: React.FC = () => {
             Final Placement Resume Approval Gate
           </h1>
           <p className="text-sm text-slate-500">
-            Workflow Step 23: Placement Head Formal Readiness Certification Gate (Unlocks Phase 7 Drive Submissions)
+            Formal Placement Head Readiness Certification Gate for corporate placement drive submissions.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs px-3 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full font-semibold flex items-center gap-1.5">
             <Lock className="w-3.5 h-3.5" />
-            Mandatory Gate for Phase 7
+            Mandatory Profile Clearance Gate
           </span>
         </div>
       </div>

@@ -66,7 +66,7 @@ export const DesignerWorkQueuePage: React.FC = () => {
           Designer Workbench — My Assigned Tasks
         </h1>
         <p className="text-sm text-slate-600 mt-1">
-          Promotional creative requests assigned to you for drafting, revisions, and Step 9 compliance audits.
+          Promotional creative requests assigned to you for drafting, revisions, and brand compliance audits.
         </p>
       </div>
 

@@ -88,7 +88,7 @@ export const ContactFormPage: React.FC = () => {
         <div>
           <h1 className="text-xl font-black text-gqt-navy">Register HR Recruiter / Contact</h1>
           <p className="text-xs text-gqt-neutral-500 mt-0.5">
-            Capture Corporate HR talent details for campus placement drives (Workflow Step 3).
+            Capture Corporate HR talent details for campus placement drives.
           </p>
         </div>
       </div>

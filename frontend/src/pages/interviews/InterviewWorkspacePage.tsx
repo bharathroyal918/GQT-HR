@@ -464,7 +464,7 @@ export const InterviewWorkspacePage: React.FC = () => {
             Interview Management & Tracking
           </h1>
           <p className="mt-1 text-sm text-gray-500">
-            Authoritative workflow steps 29–35: Shortlists, scheduling, notifications, reminders, attendance, and round tracking.
+            Manage candidate shortlists, multi-round scheduling, automated notifications, attendance tracking, and round progress.
           </p>
         </div>
 
@@ -560,56 +560,52 @@ export const InterviewWorkspacePage: React.FC = () => {
       <div className="flex border-b border-gray-200">
         <button
           onClick={() => setActiveTab('schedules')}
-          className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
-            activeTab === 'schedules'
-              ? 'border-blue-600 text-blue-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700'
-          }`}
+          className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'schedules'
+            ? 'border-blue-600 text-blue-600'
+            : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
           data-testid="tab-schedules"
         >
           <Calendar className="h-4 w-4" />
-          Schedules & Notifications (Steps 30–33)
+          Schedules & Notifications
         </button>
 
         {isStaff && (
           <>
             <button
               onClick={() => setActiveTab('shortlists')}
-              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
-                activeTab === 'shortlists'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
+              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'shortlists'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
               data-testid="tab-shortlists"
             >
               <Users className="h-4 w-4" />
-              Shortlists Received (Step 29)
+              Shortlists Received
             </button>
 
             <button
               onClick={() => setActiveTab('rounds')}
-              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
-                activeTab === 'rounds'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
+              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'rounds'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
               data-testid="tab-rounds"
             >
               <Layers className="h-4 w-4" />
-              Interview Rounds (Step 34)
+              Interview Rounds
             </button>
 
             <button
               onClick={() => setActiveTab('followups')}
-              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${
-                activeTab === 'followups'
-                  ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
+              className={`py-3 px-5 text-sm font-semibold border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'followups'
+                ? 'border-blue-600 text-blue-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
               data-testid="tab-followups"
             >
               <PhoneCall className="h-4 w-4" />
-              HR Follow-ups (Step 35)
+              HR Follow-ups
             </button>
           </>
         )}
@@ -677,9 +673,9 @@ export const InterviewWorkspacePage: React.FC = () => {
                   <th className="px-4 py-3">Company & Job</th>
                   <th className="px-4 py-3">Date & Time</th>
                   <th className="px-4 py-3">Mode & Link/Venue</th>
-                  <th className="px-4 py-3">Notification (Step 30)</th>
-                  <th className="px-4 py-3">Attendance (Step 32)</th>
-                  <th className="px-4 py-3">Conducted (Step 33)</th>
+                  <th className="px-4 py-3">Notification</th>
+                  <th className="px-4 py-3">Attendance</th>
+                  <th className="px-4 py-3">Conducted</th>
                   <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -790,7 +786,7 @@ export const InterviewWorkspacePage: React.FC = () => {
                                 size="sm"
                                 onClick={() => handleNotifyStudent(sch.id)}
                                 isLoading={isActionLoading}
-                                title="Step 30: Dispatch student notification"
+                                title="Dispatch student notification"
                                 data-testid={`notify-btn-${sch.id}`}
                               >
                                 Notify
@@ -803,7 +799,7 @@ export const InterviewWorkspacePage: React.FC = () => {
                                   setActiveSchedule(sch);
                                   setIsConductedModalOpen(true);
                                 }}
-                                title="Step 33: Record interview conducted"
+                                title="Record interview conducted"
                                 data-testid={`conducted-btn-${sch.id}`}
                               >
                                 Conducted
@@ -816,7 +812,7 @@ export const InterviewWorkspacePage: React.FC = () => {
                                   setActiveSchedule(sch);
                                   setIsRoundModalOpen(true);
                                 }}
-                                title="Step 34: Add interview round"
+                                title="Add interview round"
                                 data-testid={`add-round-btn-${sch.id}`}
                               >
                                 + Round
@@ -834,11 +830,11 @@ export const InterviewWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB CONTENT: Shortlists (Step 29) */}
+      {/* TAB CONTENT: Shortlists */}
       {activeTab === 'shortlists' && isStaff && (
         <Card className="overflow-hidden shadow-xs">
           <div className="p-4 border-b border-gray-100 flex items-center justify-between">
-            <h2 className="text-base font-semibold text-gray-900">Corporate Shortlists Ingested (Step 29)</h2>
+            <h2 className="text-base font-semibold text-gray-900">Corporate Shortlists Ingested</h2>
             <Button
               variant="primary"
               size="sm"
@@ -897,14 +893,14 @@ export const InterviewWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB CONTENT: Interview Rounds (Step 34) */}
+      {/* TAB CONTENT: Interview Rounds */}
       {activeTab === 'rounds' && isStaff && (
         <Card className="overflow-hidden shadow-xs">
           <div className="p-4 border-b border-gray-100 flex items-center justify-between">
             <div>
-              <h2 className="text-base font-semibold text-gray-900">Candidate Interview Rounds (Step 34)</h2>
+              <h2 className="text-base font-semibold text-gray-900">Candidate Interview Rounds</h2>
               <p className="text-xs text-gray-500">
-                Authoritative categories: Aptitude, Coding, Technical, HR, Managerial.
+                Evaluation categories: Aptitude, Coding, Technical, HR, Managerial.
               </p>
             </div>
           </div>
@@ -973,14 +969,14 @@ export const InterviewWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB CONTENT: HR Follow-ups (Step 35) */}
+      {/* TAB CONTENT: HR Follow-ups */}
       {activeTab === 'followups' && isStaff && (
         <Card className="overflow-hidden shadow-xs">
           <div className="p-4 border-b border-gray-100 flex items-center justify-between">
             <div>
-              <h2 className="text-base font-semibold text-gray-900">Corporate HR Follow-ups (Step 35)</h2>
+              <h2 className="text-base font-semibold text-gray-900">Corporate HR Follow-ups</h2>
               <p className="text-xs text-gray-500">
-                Authoritative metrics: Candidate status, pending rounds, and expected result date.
+                Key metrics: Candidate status, pending rounds, and expected result date.
               </p>
             </div>
             <Button
@@ -1056,7 +1052,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Receive Candidate Shortlist (Step 29)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Receive Candidate Shortlist</h3>
               <button
                 onClick={() => setIsShortlistModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -1100,7 +1096,7 @@ export const InterviewWorkspacePage: React.FC = () => {
                 ) : submittableCandidates.length === 0 ? (
                   <div className="p-4 bg-gray-50 border rounded-md text-xs text-gray-500 text-center">
                     {modalJobId
-                      ? 'No submitted candidates found for this job. Ensure profiles were dispatched in Phase 7.'
+                      ? 'No submitted candidates found for this job. Ensure profiles were dispatched to HR.'
                       : 'Please select a job above to view submitted candidates.'}
                   </div>
                 ) : (
@@ -1108,9 +1104,8 @@ export const InterviewWorkspacePage: React.FC = () => {
                     {submittableCandidates.map((c) => (
                       <label
                         key={c.student_id}
-                        className={`flex items-center gap-3 p-2.5 text-xs hover:bg-gray-50 cursor-pointer ${
-                          c.is_already_shortlisted ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''
-                        }`}
+                        className={`flex items-center gap-3 p-2.5 text-xs hover:bg-gray-50 cursor-pointer ${c.is_already_shortlisted ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''
+                          }`}
                       >
                         <input
                           type="checkbox"
@@ -1200,7 +1195,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Schedule Interview (Step 30)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Schedule Interview</h3>
               <button onClick={() => setIsScheduleModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
               </button>
@@ -1307,7 +1302,7 @@ export const InterviewWorkspacePage: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-gray-700 uppercase mb-1">
-                  Required Documents (Authoritative Step 30 field)
+                  Required Documents
                 </label>
                 <textarea
                   value={scheduleDocs}
@@ -1344,7 +1339,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Confirm Attendance (Step 32)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Confirm Attendance</h3>
               <button onClick={() => setIsAttendanceModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
               </button>
@@ -1412,7 +1407,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Record Interview Conducted (Step 33)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Record Interview Conducted</h3>
               <button onClick={() => setIsConductedModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
               </button>
@@ -1481,7 +1476,7 @@ export const InterviewWorkspacePage: React.FC = () => {
           <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="text-lg font-bold text-[#1B365D]">
-                Automatic Reminders (Step 31)
+                Automatic Reminders
               </h3>
               <button onClick={() => setIsRemindersModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
@@ -1536,7 +1531,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Add Interview Round (Step 34)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Add Interview Round</h3>
               <button onClick={() => setIsRoundModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
               </button>
@@ -1647,7 +1642,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Evaluate Round (Step 34)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Evaluate Round</h3>
               <button
                 onClick={() => setIsEvaluateRoundModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -1717,7 +1712,7 @@ export const InterviewWorkspacePage: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b pb-3">
-              <h3 className="text-lg font-bold text-[#1B365D]">Log HR Follow-up (Step 35)</h3>
+              <h3 className="text-lg font-bold text-[#1B365D]">Record Corporate HR Follow-up</h3>
               <button onClick={() => setIsFollowUpModalOpen(false)} className="text-gray-400 hover:text-gray-600">
                 ✕
               </button>

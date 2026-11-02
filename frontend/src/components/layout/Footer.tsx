@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
             <span>•</span>
             <span>GQT HRMS &amp; Recruitment CRM Platform</span>
             <span>•</span>
-            <span>Version 1.0.0</span>
+            <span>Version 2.0</span>
           </div>
 
           <div className="flex items-center gap-6 font-medium">
@@ -21,11 +21,11 @@ export const Footer: React.FC = () => {
             </span>
             <span className="flex items-center gap-1.5 text-gqt-blue">
               <Database className="w-4 h-4" />
-              PostgreSQL 16 Engine
+              PostgreSQL
             </span>
             <span className="flex items-center gap-1.5 text-gqt-charcoal">
               <Layers className="w-4 h-4" />
-              13 Phases / 41 Steps
+              Unified Talent Operations
             </span>
           </div>
         </div>

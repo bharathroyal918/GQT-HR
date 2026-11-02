@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   FileText,
@@ -9,7 +10,9 @@ import {
   Edit2,
   Save,
   X,
+  GraduationCap,
 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 import { studentsApi } from '@/api/studentsApi';
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/common/Card';
 import { Button } from '@/components/common/Button';
@@ -20,6 +23,14 @@ import { ErrorState } from '@/components/common/ErrorState';
 export const StudentProfileWorkspacePage: React.FC = () => {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  let authUser: any = null;
+  try {
+    const auth = useAuth();
+    authUser = auth?.user;
+  } catch {
+    // Fallback when rendered outside AuthProvider in test harness
+  }
 
   const [isEditing, setIsEditing] = useState(false);
   const [editCgpa, setEditCgpa] = useState('');
@@ -112,7 +123,38 @@ export const StudentProfileWorkspacePage: React.FC = () => {
   };
 
   if (isLoading) return <LoadingState message="Loading your student profile..." />;
-  if (error || !profile) return <ErrorState message="Could not load your student profile." />;
+  if (error || !profile) {
+    if (authUser && !authUser.roles?.includes('STUDENT')) {
+      return (
+        <div className="max-w-2xl mx-auto py-12 px-4">
+          <Card className="border-indigo-200 shadow-md">
+            <CardContent className="p-8 text-center space-y-4">
+              <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto">
+                <GraduationCap className="w-7 h-7" />
+              </div>
+              <h2 className="text-xl font-bold text-gqt-navy">Staff Account Active</h2>
+              <p className="text-sm text-gqt-neutral-600 max-w-md mx-auto">
+                You are currently signed in with administrative/staff privileges. Personal Student Profiles and resume document vaults are allocated to enrolled student candidate accounts.
+              </p>
+              <div className="pt-2 flex flex-wrap justify-center gap-3">
+                <Link to="/students">
+                  <Button variant="primary" size="md">
+                    Open Student Directory
+                  </Button>
+                </Link>
+                <Link to="/students/register">
+                  <Button variant="outline" size="md">
+                    Register New Candidate
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      );
+    }
+    return <ErrorState message="Could not load your student profile." />;
+  }
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12">
@@ -120,7 +162,7 @@ export const StudentProfileWorkspacePage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-xs font-semibold tracking-wider uppercase text-gqt-blue bg-blue-50 px-2 py-0.5 rounded">
-            Step 12: Profile & Documents
+            Profile & Documents
           </span>
           <h1 className="text-2xl font-bold text-gqt-navy mt-1">{profile.full_name}</h1>
           <p className="text-sm text-gqt-neutral-500">
@@ -143,7 +185,7 @@ export const StudentProfileWorkspacePage: React.FC = () => {
           <div>
             <CardTitle className="text-base">Academic Records & Credentials</CardTitle>
             <CardDescription>
-              Verified metrics utilized by the Step 13 Eligibility Verification Engine.
+              Verified metrics utilized by the Eligibility Verification Engine.
             </CardDescription>
           </div>
           {!isEditing ? (
@@ -195,9 +237,8 @@ export const StudentProfileWorkspacePage: React.FC = () => {
                   Active Backlogs
                 </span>
                 <span
-                  className={`text-xl font-bold mt-0.5 block ${
-                    profile.active_backlogs > 0 ? 'text-amber-600' : 'text-emerald-600'
-                  }`}
+                  className={`text-xl font-bold mt-0.5 block ${profile.active_backlogs > 0 ? 'text-amber-600' : 'text-emerald-600'
+                    }`}
                 >
                   {profile.active_backlogs}
                 </span>

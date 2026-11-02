@@ -609,8 +609,15 @@ if l.acquire():
         p.kill()
         p.wait()
 
-        # The OS kernel frees the lock automatically; new process acquires immediately
-        assert l2.acquire() is True
+        # In Windows NTFS, the OS kernel asynchronously releases process handle tables; allow brief handle drain
+        acquired = False
+        for _ in range(20):
+            if l2.acquire():
+                acquired = True
+                break
+            time.sleep(0.05)
+
+        assert acquired is True
         l2.release()
     finally:
         if p.poll() is None:

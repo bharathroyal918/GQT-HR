@@ -304,7 +304,7 @@ export const ContinuousImprovementHubPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-gqt-blue/30 text-blue-200 border border-blue-400/30">
-                Phase 13: Continuous Improvement
+                Continuous Improvement & Strategic Planning
               </span>
               <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                 Deterministic / Zero AI

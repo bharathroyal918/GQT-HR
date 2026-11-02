@@ -92,7 +92,7 @@ export const StudentAssessmentsPage: React.FC = () => {
             Student Assessments Engine
           </h1>
           <p className="text-sm text-slate-500">
-            Workflow Steps 17–18: Timed Aptitude & Domain-Specific Technical Assessments
+            Timed Aptitude & Domain-Specific Technical Assessments
           </p>
         </div>
         <div className="flex gap-2">
@@ -108,14 +108,14 @@ export const StudentAssessmentsPage: React.FC = () => {
             onClick={() => setTestFilter('APTITUDE')}
             className="text-xs"
           >
-            Aptitude (Step 17)
+            Aptitude
           </Button>
           <Button
             variant={testFilter === 'TECHNICAL' ? 'primary' : 'outline'}
             onClick={() => setTestFilter('TECHNICAL')}
             className="text-xs"
           >
-            Technical (Step 18)
+            Technical
           </Button>
         </div>
       </div>

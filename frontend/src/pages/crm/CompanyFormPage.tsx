@@ -142,7 +142,7 @@ export const CompanyFormPage: React.FC = () => {
               {isEdit ? `Edit Company: ${existingCompany?.name}` : 'Register New Corporate Company'}
             </h1>
             <p className="text-xs text-gqt-neutral-500 mt-0.5">
-              Target company identification and industry classification (Workflow Step 1).
+              Target company identification and industry classification.
             </p>
           </div>
         </div>

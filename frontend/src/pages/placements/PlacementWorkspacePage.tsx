@@ -438,7 +438,7 @@ export const PlacementWorkspacePage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gqt-blue">
             <Award className="w-4 h-4 text-gqt-blue" />
-            Phase 8: Placement Management & Tracking (Workflow Steps 36–41)
+            Placement Operations &amp; Verification
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-gqt-navy mt-1 tracking-tight">
             Placement Management
@@ -539,7 +539,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                   }`}
               >
                 <Users className="w-4 h-4" />
-                Candidate Statuses (Step 37)
+                Candidate Statuses
               </button>
 
               <button
@@ -550,7 +550,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                   }`}
               >
                 <FileCheck className="w-4 h-4" />
-                Offer Letters & Acceptance (Steps 39–40)
+                Offer Letters & Acceptance
               </button>
 
               <button
@@ -561,7 +561,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                   }`}
               >
                 <BadgeCheck className="w-4 h-4" />
-                Joining Verification (Step 41)
+                Joining Verification
               </button>
 
               <button
@@ -572,7 +572,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                   }`}
               >
                 <Layers className="w-4 h-4" />
-                Intake Batches (Step 36)
+                Intake Batches
               </button>
             </div>
           </div>
@@ -640,7 +640,7 @@ export const PlacementWorkspacePage: React.FC = () => {
         <Card className="overflow-hidden">
           <div className="p-4 border-b border-gqt-neutral-200 bg-gqt-neutral-50 flex items-center justify-between">
             <h3 className="text-sm font-bold text-gqt-navy">
-              {isStaff ? 'Candidate Results & Placement Decisions (Step 37)' : 'My Placement Decisions'}
+              {isStaff ? 'Candidate Results & Placement Decisions' : 'My Placement Decisions'}
             </h3>
             <span className="text-xs text-gqt-neutral-500 font-medium">
               Showing {statuses.length} record{statuses.length === 1 ? '' : 's'}
@@ -761,7 +761,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                                   setStatusLocation(item.work_location || '');
                                   setIsStatusModalOpen(true);
                                 }}
-                                title="Update Status (Step 37)"
+                                title="Update Status"
                               >
                                 Update Status
                               </Button>
@@ -773,7 +773,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                                   setActiveStatusItem(item);
                                   setIsNotifyModalOpen(true);
                                 }}
-                                title="Notify Student (Step 38)"
+                                title="Notify Student"
                                 className="text-gqt-blue border-blue-200 hover:bg-blue-50"
                               >
                                 <Send className="w-3.5 h-3.5" />
@@ -792,7 +792,7 @@ export const PlacementWorkspacePage: React.FC = () => {
                                     setOfferLocation(item.work_location || '');
                                     setIsOfferModalOpen(true);
                                   }}
-                                  title="Upload Official Offer Letter (Step 39)"
+                                  title="Upload Official Offer Letter"
                                 >
                                   <Upload className="w-3.5 h-3.5 mr-1" />
                                   Offer
@@ -828,11 +828,11 @@ export const PlacementWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB 2: Offer Letters & Acceptance (Step 39 & 40) */}
+      {/* TAB 2: Offer Letters & Acceptance */}
       {isStaff && activeTab === 'offers' && (
         <Card className="overflow-hidden">
           <div className="p-4 border-b border-gqt-neutral-200 bg-gqt-neutral-50 flex items-center justify-between">
-            <h3 className="text-sm font-bold text-gqt-navy">Offer Letters & Response Lifecycle (Steps 39 & 40)</h3>
+            <h3 className="text-sm font-bold text-gqt-navy">Offer Letters & Response Lifecycle</h3>
             <span className="text-xs text-gqt-neutral-500 font-medium">
               Showing {offers.length} offer{offers.length === 1 ? '' : 's'}
             </span>
@@ -947,11 +947,11 @@ export const PlacementWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB 3: Joining Verification (Step 41) */}
+      {/* TAB 3: Joining Verification */}
       {isStaff && activeTab === 'joining' && (
         <Card className="overflow-hidden">
           <div className="p-4 border-b border-gqt-neutral-200 bg-gqt-neutral-50 flex items-center justify-between">
-            <h3 className="text-sm font-bold text-gqt-navy">Joining Status & Candidate Reporting (Step 41)</h3>
+            <h3 className="text-sm font-bold text-gqt-navy">Joining Status & Candidate Reporting</h3>
             <span className="text-xs text-gqt-neutral-500 font-medium">
               Tracking accepted candidates
             </span>
@@ -1053,11 +1053,11 @@ export const PlacementWorkspacePage: React.FC = () => {
         </Card>
       )}
 
-      {/* TAB 4: Intake Batches (Step 36) */}
+      {/* TAB 4: Intake Batches */}
       {isStaff && activeTab === 'intakes' && (
         <Card className="overflow-hidden">
           <div className="p-4 border-b border-gqt-neutral-200 bg-gqt-neutral-50 flex items-center justify-between">
-            <h3 className="text-sm font-bold text-gqt-navy">Final Result Ingestion Batches (Step 36)</h3>
+            <h3 className="text-sm font-bold text-gqt-navy">Final Result Ingestion Batches</h3>
             <span className="text-xs text-gqt-neutral-500 font-medium">
               Showing {intakes.length} intake{intakes.length === 1 ? '' : 's'}
             </span>
@@ -1132,7 +1132,7 @@ export const PlacementWorkspacePage: React.FC = () => {
               <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
                 <h3 className="text-lg font-bold text-gqt-navy flex items-center gap-2">
                   <Upload className="w-5 h-5 text-gqt-blue" />
-                  Ingest Final Results from Corporate HR (Step 36)
+                  Ingest Final Results from Corporate HR
                 </h3>
                 <button
                   type="button"
@@ -1315,7 +1315,7 @@ export const PlacementWorkspacePage: React.FC = () => {
           <div className="bg-white rounded-xl shadow-xl max-w-lg w-full">
             <form onSubmit={handleUpdateStatus} className="p-6 space-y-4">
               <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
-                <h3 className="text-lg font-bold text-gqt-navy">Update Candidate Status (Step 37)</h3>
+                <h3 className="text-lg font-bold text-gqt-navy">Update Candidate Status</h3>
                 <button
                   type="button"
                   onClick={() => setIsStatusModalOpen(false)}
@@ -1407,7 +1407,7 @@ export const PlacementWorkspacePage: React.FC = () => {
             <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
               <h3 className="text-lg font-bold text-gqt-navy flex items-center gap-2">
                 <Send className="w-5 h-5 text-gqt-blue" />
-                Notify Candidate (Step 38)
+                Notify Candidate
               </h3>
               <button
                 type="button"
@@ -1464,7 +1464,7 @@ export const PlacementWorkspacePage: React.FC = () => {
               <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
                 <h3 className="text-lg font-bold text-gqt-navy flex items-center gap-2">
                   <FileText className="w-5 h-5 text-gqt-blue" />
-                  Upload Official Offer Letter (Step 39)
+                  Upload Official Offer Letter
                 </h3>
                 <button
                   type="button"
@@ -1555,7 +1555,7 @@ export const PlacementWorkspacePage: React.FC = () => {
               <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
                 <h3 className="text-lg font-bold text-gqt-navy flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                  Record Offer Decision (Step 40)
+                  Record Offer Decision
                 </h3>
                 <button
                   type="button"
@@ -1639,7 +1639,7 @@ export const PlacementWorkspacePage: React.FC = () => {
               <div className="flex items-center justify-between border-b border-gqt-neutral-200 pb-3">
                 <h3 className="text-lg font-bold text-gqt-navy flex items-center gap-2">
                   <BadgeCheck className="w-5 h-5 text-indigo-600" />
-                  Verify Candidate Joining (Step 41)
+                  Verify Candidate Joining
                 </h3>
                 <button
                   type="button"

@@ -669,3 +669,49 @@ def test_automation_run_api_endpoint_rbac(
     assert res_officer.status_code == status.HTTP_200_OK
     assert res_officer.data["success"] is True
     assert res_officer.data["data"]["dry_run"] is True
+
+
+def test_provider_adapters_configuration_validation():
+    """Verify that SMTP and Meta WhatsApp adapters correctly validate configuration and simulate safely."""
+    from apps.crm.adapters.email import SimulatedEmailAdapter, DjangoSMTPEmailAdapter
+    from apps.crm.adapters.whatsapp import SimulatedWhatsAppAdapter, MetaWhatsAppAdapter
+
+    # 1. Simulated adapters validate cleanly
+    sim_email = SimulatedEmailAdapter()
+    email_status = sim_email.validate_configuration()
+    assert email_status["valid"] is True
+    assert email_status["is_simulated"] is True
+
+    sim_wa = SimulatedWhatsAppAdapter()
+    wa_status = sim_wa.validate_configuration()
+    assert wa_status["valid"] is True
+    assert wa_status["is_simulated"] is True
+
+    # 2. Unconfigured Meta adapter detects missing credentials
+    unconfigured_meta = MetaWhatsAppAdapter(api_token="", phone_number_id="")
+    meta_status = unconfigured_meta.validate_configuration()
+    assert meta_status["valid"] is False
+    assert "not configured" in meta_status["message"]
+
+    # 3. Configured Meta adapter passes validation
+    configured_meta = MetaWhatsAppAdapter(
+        api_token="EAAG_test_token",
+        phone_number_id="1234567890",
+        verify_token="test_verify",
+        app_secret="test_secret",
+    )
+    meta_configured_status = configured_meta.validate_configuration()
+    assert meta_configured_status["valid"] is True
+    assert meta_configured_status["configured_api_token"] is True
+    assert meta_configured_status["configured_phone_number_id"] is True
+
+    # 4. Unconfigured SMTP adapter fails delivery gracefully without crashing
+    smtp_adapter = DjangoSMTPEmailAdapter()
+    delivery_res = smtp_adapter.send_email(
+        recipient="test@example.com",
+        subject="Test Alert",
+        body_text="Testing SMTP error handling",
+    )
+    assert delivery_res.success is False
+    assert delivery_res.status == "FAILED"
+    assert "Missing external SMTP settings" in delivery_res.error_message

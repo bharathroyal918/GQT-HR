@@ -36,7 +36,7 @@ export const OutreachPage: React.FC = () => {
         <div>
           <h1 className="text-2xl font-black text-gqt-navy tracking-tight">Corporate Outreach History</h1>
           <p className="text-sm text-gqt-neutral-600 mt-1">
-            Audit-logged multi-channel touchpoints contributing to the 100+ outreach/day target (Workflow Step 2).
+            Audit-logged multi-channel touchpoints contributing to the 100+ outreach/day target.
           </p>
         </div>
         <Link to="/crm/outreach/new">

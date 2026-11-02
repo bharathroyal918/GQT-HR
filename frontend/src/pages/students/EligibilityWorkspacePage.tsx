@@ -126,7 +126,7 @@ export const EligibilityWorkspacePage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-semibold tracking-wider uppercase text-gqt-blue bg-blue-50 px-2 py-0.5 rounded">
-                Step 13: Eligibility Engine
+                Eligibility Engine
               </span>
               <StatusBadge
                 variant={job.status === 'APPROVED' ? 'success' : 'neutral'}
@@ -293,7 +293,7 @@ export const EligibilityWorkspacePage: React.FC = () => {
                 Criterion-by-Criterion Evaluation Breakdown
               </CardTitle>
               <CardDescription>
-                Auditable evaluation result recorded by the Step 13 Eligibility Verification Engine.
+                Auditable evaluation result recorded by the Eligibility Verification Engine.
               </CardDescription>
             </div>
             <Button variant="outline" size="sm" onClick={() => setSelectedEvaluation(null)}>
@@ -374,7 +374,7 @@ export const EligibilityWorkspacePage: React.FC = () => {
             </div>
 
             <p className="text-xs text-gqt-neutral-500">
-              Workflow Step 14: Placement Officers and Heads may manually override automated rule evaluation outcomes. Every override is immutably recorded in the security audit trail.
+              Placement Officers and Heads may manually override automated rule evaluation outcomes. Every override is immutably recorded in the security audit trail.
             </p>
 
             {overrideError && (
